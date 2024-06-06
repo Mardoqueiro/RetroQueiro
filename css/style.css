@@ -8,7 +8,14 @@
 ::-webkit-scrollbar{
     display: none;
 }
-
+/* display -> grid */
+body{
+    display: grid;
+}
+/*Number of rows */
+body{
+    grid-template-rows: auto minmax(100%, 100dvh) auto;
+}
 /* NavBar */
 .navbar {
 
@@ -23,6 +30,6 @@ img {
     object-position: center;
 }
 /* text-alighn: center */
-:is(h2) {
+:is(h2, footer p[class='lead']) {
     text-align: center;
 }
