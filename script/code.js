@@ -49,9 +49,10 @@ let products =
     )
 
 function recentProducts() {
-    let arrSize = products.length
-    let latestProducts = products.reverse().slice(0, arrSize >> 1)
-    latestProducts.forEach(product => {
+    try{
+        let arrSize = products.length
+        let latestProducts = products.reverse().slice(0, arrSize >> 1)
+        latestProducts.forEach(product => {
         wrapper.innerHTML += `
         <div class="card">
             <img src="${product.image}" class="card-img-top" alt="${product.productName}" loading="lazy">
@@ -62,5 +63,8 @@ function recentProducts() {
         </div>
         `
     })
+    } catch (e) {
+        wrapper.textContent = "Please contact our administrator"
+    }
 }
 recentProducts()
