@@ -6,43 +6,51 @@ let products =
             [
                 {
                     id:1,
-                    productName:"Retro Queiro",
-                    category: "eyeglasses",
-                    description: "Just a logo",
-                    ammount: 350.50,
-                    image:"https://mardoqueiro.github.io/all_images/eyeglasses/retro_queiro.png"
+                    productName:"Custom Cassette Bluetooth Speaker by @sab_3d",
+                    category: "Bluetooth Speaker",
+                    description: "@sab_3d's custom-designed Bluetooth speaker, resembling a cassette tape, offers wireless streaming, rechargeable battery, and high-quality sound, making it a nostalgic conversation starter.",
+                    amount: 2799.99,
+                    image:"https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.record.player.jpeg"
                 },
                 {
                     id:2,
-                    productName:"Retro",
-                    category: "Anything you want",
-                    description: "whatever you want",
-                    ammount: 450.50,
-                    image:"https://mardoqueiro.github.io/all_images/images/0f2aeb671c21d094e80784c4c8b712c7.jpg"
+                    productName:"Retro Style Headphones with SD Card and Bluetooth",
+                    category: "Headphones",
+                    description: "These retro-style headphones feature Bluetooth, an SD card slot, cushioned ear cups, leather headband, and metal accents, blending classic design with modern functionality.",
+                    amount: 1399.99,
+                    image:"https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Headphone.jpeg"
                 },
                 {
                     id:3,
-                    productName:"Queiro",
-                    category: "what do you want",
-                    description: "however you want",
-                    ammount: 600.50,
-                    image:"https://mardoqueiro.github.io/all_images/images/keyboaard.img.png"
+                    productName:"Vintage Bluetooth Speaker with Display",
+                    category: "Bluetooth Speaker",
+                    description: "This vintage-style Bluetooth speaker features a 1950s radio design, digital display, Apple Music and Spotify support, and retro dials, adding a touch of nostalgia to any room.",
+                    amount: 2499.99,
+                    image:"https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Bluetooth.Speaker.jpeg"
                 },
                 {
                     id:4,
-                    productName:"Stuff",
-                    category: "what stuff?",
-                    description: "how do you want it?",
-                    ammount: 390.50,
-                    image:"https://mardoqueiro.github.io/all_images/images/Calculator_img.png"
+                    productName:"Classic Portable Record Player",
+                    category: "Record Players",
+                    description: "This portable record player, with a retro design and built-in speaker, offers a convenient way to enjoy your vinyl collection on the go.",
+                    amount: 1699.99,
+                    image:"https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Vinyl.Portable.Turntable.jpeg"
                 },
                 {
                     id:5,
-                    productName:"Something",
-                    category: "nothing here",
-                    description: "Do you want something here",
-                    ammount: 550.50,
-                    image: "https://mardoqueiro.github.io/all_images/images/Building a Unified Team - John Maxwell.jpg"
+                    productName:"Classic Jukebox with Karaoke and Streaming",
+                    category: "Jukeboxes",
+                    description: "This retro jukebox features modern features like karaoke, AM/FM radio, Bluetooth, and Spotify & Apple Music support, with vibrant LED lights and a classic design for home entertainment.",
+                    amount: 5499.99,
+                    image:"https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Jukebox.jpeg"
+                },
+                {
+                    id:6,
+                    productName:"Retro Game Boy Gaming Console",
+                    category: "Gaming Consoles",
+                    description: "The Retro Game Boy Gaming Console offers a nostalgic gaming experience with its modern design, color LCD screen, rechargeable battery, and pre-loaded 300 classic games.",
+                    amount: 1499.99,
+                    image:"https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Gaming.Console.jpeg"
                 }
             ]
         )
