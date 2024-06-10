@@ -5,6 +5,7 @@ let products =
         JSON.stringify(
             [
                 {
+                id:1,
                 productName: "Custom Cassette Bluetooth Speaker by @sab_3d",
                 category: "Bluetooth Speaker",
                 description: "@sab_3d's custom-designed Bluetooth speaker, resembling a cassette tape, offers wireless streaming rechargeablebattery, and high-quality sound, making it a nostalgic conversation starter.",
@@ -12,6 +13,7 @@ let products =
                 image: "https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.record.player.jpeg"
               },
               {
+                id:2,
                 productName: "Retro Style Headphones with SD Card and Bluetooth",
                 category: "Headphones",
                 description: "These retro-style headphones feature Bluetooth, an SD card slot, cushioned ear cups, leather headband, and metalaccents, blending classic design with modern functionality.",
@@ -19,6 +21,7 @@ let products =
                 image: "https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Headphone.jpeg"
               },
               {
+                id:3,
                 productName: "Vintage Bluetooth Speaker with Display",
                 category: "Bluetooth Speaker",
                 description: "This vintage-style Bluetooth speaker features a 1950s radio design, digital display, Apple Music and Spotifysupport, and retro dials, adding a touch of nostalgia to any room.",
