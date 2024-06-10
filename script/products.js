@@ -44,7 +44,7 @@ try{
             <div class="card-body">
               <h5 class="card-title">${product.productName}</h5>
               <p class="card-text">${product.description}</p>
-              <p class="card-text">${product.ammount}</p>
+              <p class="card-text">${product.amount}</p>
               <button href="#" class="btn btn-primary">Add to cart</button>
             </div>
         </div>
