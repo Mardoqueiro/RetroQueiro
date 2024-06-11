@@ -29,6 +29,7 @@ let products =
                 image: "https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Bluetooth.Speaker.jpeg"
               },
               {
+                id:4,
                 productName: "Classic Portable Record Player",
                 category: "Record Players",
                 description: "This portable record player, with a retro design and built-in speaker, offers a convenient way to enjoy your vinyl  collection on the go.",
@@ -36,6 +37,7 @@ let products =
                 image: "https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Vinyl.Portable.Turntable.jpeg"
               },
               {
+                id:5,
                 productName: "Classic Jukebox with Karaoke and Streaming",
                 category: "Jukeboxes",
                 description: "This retro jukebox features modern features like karaoke, AM/FM radio, Bluetooth, and Spotify & Apple Musicsupport, with vibrant LED lights and a classic design for home entertainment.",
@@ -43,6 +45,7 @@ let products =
                 image: "https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Jukebox.jpeg"
               },
               {
+                id:6,
                 productName: "Retro Game Boy Gaming Console",
                 category: "Gaming Consoles",
                 description: "The Retro Game Boy Gaming Console offers a nostalgic gaming experience with its modern design, color LCDscreen rechargeable battery, and pre-loaded 300 classic games.",
