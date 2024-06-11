@@ -1,12 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-*,
-*::after,
-*::before {
+:root {
+    --bg-color: #FFFAE6;
+    --main-color: #FF9F66;
+    --text-color: #002379;
+    --accent-color: #FF5F00;
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 
 :root{
     --bg-color: #FFFAE6;
@@ -22,21 +28,26 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     overflow-x: hidden;
+
 }
 
 ::-webkit-scrollbar {
     display: none;
 }
 
-/* display -> grid */
-:is(body, .card) {
+.container {
     display: grid;
+    grid-template-rows: auto 1fr auto;
 }
 
+<<<<<<< admin
+.navbar img[alt='logo'] {
+    width: 5rem;
+
 /* Number of rows */
-:is(body) {
+/*:is(body) {
     grid-template-rows: auto minmax(100dvh, 100%) auto;
-}
+} */
 /*------------------------------
   
 --------------------------------*/
@@ -46,46 +57,95 @@ body {
     & img[alt='logo'] {
         width: 5rem;
     }
+
 }
 
-/* All the images */
 img {
     aspect-ratio: 1;
     object-fit: cover;
     object-position: center;
 }
 
-/* text-align: center */
-:is(h2, footer p) {
+h2, footer p {
     text-align: center;
 }
 
 .card {
     width: 18rem;
 
-    & img {
+    img {
         object-fit: contain;
         padding-block: .2rem;
     }
 
-    & .card-body {
+    .card-body {
         display: grid;
-        grid-template-rows: subgrid;
-        grid-row: span 4;
+        grid-template-rows: subgrid-auto / 1fr 1fr 1fr;
     }
 }
-/*------------------------------
-  Screen sizing
---------------------------------*/
+
 @media screen and (width < 768px) {
 
     :is(.col) {
+
         padding-block: .2rem;
 
-        & button {
+        button {
             width: 100%;
         }
     }
+}
+
+
+/*---------------------------------------
+  Product section
+----------------------------------------*/
+/*---------------------------------------
+  Footer section
+----------------------------------------*/
+.footer {
+    background-color: var(--main-color);
+    color: var(--bg-color);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .img-footer,
+    .footer-contact,
+    .footer-social,
+    .footer-title,
+    .social-icons,
+    .footer-copyright,
+    .footer-menu {
+        font-size: 1rem;
+    }
+
+    .img-footer {
+        width: 5rem;
+    }
+}
+
+.img-footer,
+.footer-contact,
+.footer-social,
+.footer-title,
+.social-icons,
+.footer-copyright,
+.footer-menu {
+    font-size: 1.2rem;
+}
+
+.img-footer {
+    width: 10rem;
 }
 
 /*------------------------------*/
