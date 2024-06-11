@@ -88,7 +88,7 @@ img {
     }
 }
 
-/*------------------------------
+/*------------------------------*/
 
 .img-fluid {
     float: right;
@@ -134,9 +134,9 @@ section {
     right: 0;
     bottom: 0;
 
-    /* @media screen and (width < 768px) {
+    @media screen and (width < 768px) {
         grid-template-columns: repeat(auto-fit, minmax(150px, auto));
-    } */
+    }
 }
 
 .footer-content h4 {
@@ -199,5 +199,57 @@ section {
     }
 }
 /*------------------------------
-  
+  Products
 --------------------------------*/
+.product-container {
+    padding-block: 2rem;
+}
+
+.product-container .product-title {
+    font-size: 3rem;
+}
+
+.product-inner {
+    padding-block: 1rem;
+}
+
+.product-inner .product-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    gap: 2rem;
+}
+
+.row .card {
+    padding: 1rem;
+}
+
+.button {
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1px solid var(--text-color);
+}
+
+.button:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border: 1px solid var(--text-color);
+}
+
+.form-control {
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid var(--text-color);
+}
+
+@media screen and (max-width: 768px) {
+    .row {
+        gap: 1rem;
+    }
+}
