@@ -13,9 +13,22 @@
     box-sizing: border-box;
 }
 
+
+:root{
+    --bg-color: #FFFAE6;
+    --main-color: #FF9F66;
+    --text-color: #002379;
+    --other-color: #FF5F00;
+    /* --big-font: 4.3rem;
+    /* --h2-font: 2.2rem; */
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+
 }
 
 ::-webkit-scrollbar {
@@ -27,8 +40,24 @@ body {
     grid-template-rows: auto 1fr auto;
 }
 
+<<<<<<< admin
 .navbar img[alt='logo'] {
     width: 5rem;
+
+/* Number of rows */
+/*:is(body) {
+    grid-template-rows: auto minmax(100dvh, 100%) auto;
+} */
+/*------------------------------
+  
+--------------------------------*/
+/* navbar */
+.navbar {
+
+    & img[alt='logo'] {
+        width: 5rem;
+    }
+
 }
 
 img {
@@ -55,8 +84,10 @@ h2, footer p {
     }
 }
 
-@media (max-width: 767px) {
-    .col {
+@media screen and (width < 768px) {
+
+    :is(.col) {
+
         padding-block: .2rem;
 
         button {
@@ -67,6 +98,7 @@ h2, footer p {
 /*---------------------------------------
     Index section
 ----------------------------------------*/
+
 
 
 /*---------------------------------------
@@ -138,4 +170,170 @@ h2, footer p {
 
 .img-footer {
     width: 10rem;
+}
+
+/*------------------------------*/
+
+.img-fluid {
+    float: right;
+
+    @media screen and (width < 768px) {
+        float: none;
+    }
+}
+
+.slider__content {
+    position: absolute;
+    width: 70%;
+    top: 40%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    padding: auto;
+
+    @media screen and (width < 768px) {
+        width: 70%;
+        top: 50%;
+        left: 50%;
+    }
+}
+
+/*------------------------------
+  
+--------------------------------*/
+
+
+/*------------------------------
+  Footer
+--------------------------------*/
+section {
+    padding: 80px 13% 70px;
+}
+
+.footer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+    gap: 3.5rem;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    @media screen and (width < 768px) {
+        grid-template-columns: repeat(auto-fit, minmax(150px, auto));
+    }
+}
+
+.footer-content h4 {
+    margin-bottom: 1.5rem;
+    font-size: 20px;
+}
+
+.footer-content li {
+    margin-bottom: 16px;
+}
+
+.footer-content li a {
+    display: block;
+    font-size: 15px;
+    font-weight: 400;
+    transition: all .40s ease;
+}
+
+.footer-content li a:hover {
+    transform: translateY(-3px) translateX(-5px);
+    color: var(--other-color);
+}
+
+.footer-content p {
+    font-size: 16px;
+    line-height: 30px;
+    margin-right: 17px;
+    transition: all .40s ease;
+}
+
+.icon a{
+    display: inline-block;
+    font-size: 22px;
+    margin-right: 17px;
+    transition: all .40s ease;
+}
+
+.icon a:hover {
+    transform: translateY(-5px) translateX(-5px);
+    color: var(--other-color);
+}
+
+@media (max-width: 1690px) {
+    section{
+        padding: 50px 5% 40px;
+    }
+}
+@media (max-width: 1120px) {
+    .footer{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+        gap: 2rem;
+    }
+}
+@media (max-width: 700px) {
+    .footer{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+        gap: 2rem;
+    }
+}
+/*------------------------------
+  Products
+--------------------------------*/
+.product-container {
+    padding-block: 2rem;
+}
+
+.product-container .product-title {
+    font-size: 3rem;
+}
+
+.product-inner {
+    padding-block: 1rem;
+}
+
+.product-inner .product-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.row {
+    gap: 2rem;
+}
+
+.row .card {
+    padding: 1rem;
+}
+
+.button {
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    border: 1px solid var(--text-color);
+}
+
+.button:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border: 1px solid var(--text-color);
+}
+
+.form-control {
+    padding: .5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 100%;
+    border: 1px solid var(--text-color);
+}
+
+@media screen and (max-width: 768px) {
+    .row {
+        gap: 1rem;
+    }
 }

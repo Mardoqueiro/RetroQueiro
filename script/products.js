@@ -22,6 +22,7 @@ function recentProducts() {
             <img src="${product.image}" class="card-img-top" alt="${product.productName}" loading="lazy">
             <div class="card-body">
               <h5 class="card-title">${product.productName}</h5>
+              <h4 class="card-text">${product.category}</h4>
               <p class="card-text">${product.description}</p>
             </div>
         </div>
@@ -53,3 +54,4 @@ try{
 } catch (e) {
     console.log(e)
 }
+
