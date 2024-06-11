@@ -1,255 +1,139 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-*,
-*::after,
-*::before {
+:root {
+    --bg-color: #FFFAE6;
+    --main-color: #FF9F66;
+    --text-color: #002379;
+    --accent-color: #FF5F00;
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-:root{
-    --bg-color: #FFFAE6;
-    --main-color: #FF9F66;
-    --text-color: #002379;
-    --other-color: #FF5F00;
-    /* --big-font: 4.3rem;
-    /* --h2-font: 2.2rem; */
-}
-
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--bg-color);
-    color: var(--text-color);
-    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
     display: none;
 }
 
-/* display -> grid */
-:is(body, .card) {
+.container {
     display: grid;
+    grid-template-rows: auto 1fr auto;
 }
 
-/* Number of rows */
-:is(body) {
-    grid-template-rows: auto minmax(100dvh, 100%) auto;
-}
-/*------------------------------
-  
---------------------------------*/
-/* navbar */
-.navbar {
-
-    & img[alt='logo'] {
-        width: 5rem;
-    }
+.navbar img[alt='logo'] {
+    width: 5rem;
 }
 
-/* All the images */
 img {
     aspect-ratio: 1;
     object-fit: cover;
     object-position: center;
 }
 
-/* text-align: center */
-:is(h2, footer p) {
+h2, footer p {
     text-align: center;
 }
 
 .card {
     width: 18rem;
 
-    & img {
+    img {
         object-fit: contain;
         padding-block: .2rem;
     }
 
-    & .card-body {
+    .card-body {
         display: grid;
-        grid-template-rows: subgrid;
-        grid-row: span 4;
+        grid-template-rows: subgrid-auto / 1fr 1fr 1fr;
     }
 }
-/*------------------------------
-  Screen sizing
---------------------------------*/
-@media screen and (width < 768px) {
 
-    :is(.col) {
+@media (max-width: 767px) {
+    .col {
         padding-block: .2rem;
 
-        & button {
+        button {
             width: 100%;
         }
     }
 }
-
-/*------------------------------*/
-
-.img-fluid {
-    float: right;
-
-    @media screen and (width < 768px) {
-        float: none;
-    }
-}
-
-.slider__content {
-    position: absolute;
-    width: 70%;
-    top: 40%;
-    left: 40%;
-    transform: translate(-50%, -50%);
-    padding: auto;
-
-    @media screen and (width < 768px) {
-        width: 70%;
-        top: 50%;
-        left: 50%;
-    }
-}
-
-/*------------------------------
-  
---------------------------------*/
+/*---------------------------------------
+    Index section
+----------------------------------------*/
 
 
-/*------------------------------
-  Footer
---------------------------------*/
-section {
-    padding: 80px 13% 70px;
-}
+/*---------------------------------------
+    About section
+----------------------------------------*/
 
+/*---------------------------------------
+    Checkout section
+----------------------------------------*/
+
+
+/*---------------------------------------
+    Admin section
+----------------------------------------*/
+
+/*---------------------------------------
+    Contact section
+----------------------------------------*/
+
+/*---------------------------------------
+    Product section
+----------------------------------------*/
+
+/*---------------------------------------
+    Footer section
+----------------------------------------*/
 .footer {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-    gap: 3.5rem;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    @media screen and (width < 768px) {
-        grid-template-columns: repeat(auto-fit, minmax(150px, auto));
-    }
-}
-
-.footer-content h4 {
-    margin-bottom: 1.5rem;
-    font-size: 20px;
-}
-
-.footer-content li {
-    margin-bottom: 16px;
-}
-
-.footer-content li a {
-    display: block;
-    font-size: 15px;
-    font-weight: 400;
-    transition: all .40s ease;
-}
-
-.footer-content li a:hover {
-    transform: translateY(-3px) translateX(-5px);
-    color: var(--other-color);
-}
-
-.footer-content p {
-    font-size: 16px;
-    line-height: 30px;
-    margin-right: 17px;
-    transition: all .40s ease;
-}
-
-.icon a{
-    display: inline-block;
-    font-size: 22px;
-    margin-right: 17px;
-    transition: all .40s ease;
-}
-
-.icon a:hover {
-    transform: translateY(-5px) translateX(-5px);
-    color: var(--other-color);
-}
-
-@media (max-width: 1690px) {
-    section{
-        padding: 50px 5% 40px;
-    }
-}
-@media (max-width: 1120px) {
-    .footer{
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-        gap: 2rem;
-    }
-}
-@media (max-width: 700px) {
-    .footer{
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-        gap: 2rem;
-    }
-}
-/*------------------------------
-  Products
---------------------------------*/
-.product-container {
-    padding-block: 2rem;
-}
-
-.product-container .product-title {
-    font-size: 3rem;
-}
-
-.product-inner {
-    padding-block: 1rem;
-}
-
-.product-inner .product-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.row {
-    gap: 2rem;
-}
-
-.row .card {
-    padding: 1rem;
-}
-
-.button {
-    padding: .5rem 1rem;
-    font-size: 1rem;
-    font-weight: 500;
-    border: 1px solid var(--text-color);
-}
-
-.button:hover {
-    background-color: var(--text-color);
+    background-color: var(--main-color);
     color: var(--bg-color);
-    border: 1px solid var(--text-color);
 }
 
-.form-control {
-    padding: .5rem 1rem;
-    font-size: 1rem;
-    font-weight: 500;
-    width: 100%;
-    border: 1px solid var(--text-color);
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
 }
 
 @media screen and (max-width: 768px) {
-    .row {
-        gap: 1rem;
+    .footer-content {
+        grid-template-columns: repeat(1, 1fr);
     }
+
+    .img-footer,
+    .footer-contact,
+    .footer-social,
+    .footer-title,
+    .social-icons,
+    .footer-copyright,
+    .footer-menu {
+        font-size: 1rem;
+    }
+
+    .img-footer {
+        width: 5rem;
+    }
+}
+
+.img-footer,
+.footer-contact,
+.footer-social,
+.footer-title,
+.social-icons,
+.footer-copyright,
+.footer-menu {
+    font-size: 1.2rem;
+}
+
+.img-footer {
+    width: 10rem;
 }
