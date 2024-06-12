@@ -67,10 +67,143 @@ h2, footer p {
 /*---------------------------------------
     Index section
 ----------------------------------------*/
+.index-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    .index-activation {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+.index-content{
+    position: absolute;
+    width: 70%;
+    left: 5%;
+    top: 40%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+}
+
+.index-img {
+    float: right;
+}
+
+
+.retro-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rtr-btn{
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    padding: .5rem;
+    border-radius: .5rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.rtr-btn:hover {
+    background-color: var(--main-color);
+}
 
 /*---------------------------------------
     About section
 ----------------------------------------*/
+.about-section, .store-area {
+    display: grid;
+    grid-gap: 1rem;
+    padding: 1rem;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.about-section img, .store-area img {
+    width: 100%;
+}
+
+.store-title {
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.store-btn {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    padding: .5rem;
+    border-radius: .5rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.store-btn:hover {
+    background-color: var(--main-color);
+}
+
+/* Start Choose Us Area */
+.choose-area, .choose-wrap, .choose-container, .single-chooose, .choose-us, .choose-icon, .choose-details {
+    display: grid;
+    grid-gap: 1rem;
+    padding: 1rem;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.choose-wrap {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+@media screen and (max-width: 768px) {
+    .choose-wrap {
+        grid-template-columns: 1fr;
+    }
+}
+
+.choose-icon i {
+    font-size: 3rem;
+}
+
+/* Start Our Team Area */
+.team-area {
+    display: grid;
+    grid-gap: 1rem;
+    padding: 1rem;
+    color: var(--text-color);   
+}
+
+.team-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    color: var(--text-color);
+}
+
+.section-title{
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.team-foo{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    color: var(--text-color);
+}
+
+.team-thumb{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    color: var(--text-color);
+}
 
 /*---------------------------------------
     Checkout section
@@ -83,6 +216,42 @@ h2, footer p {
 /*---------------------------------------
     Contact section
 ----------------------------------------*/
+.contact-area{
+    display: grid;
+    grid-gap: 1rem;
+    padding: 1rem;
+    color: var(--text-color);
+}
+
+.contact-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    color: var(--text-color);
+}
+
+.contact-title{
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.contact-address-inner{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    color: var(--text-color);
+}
+
+/* Start Contact Form */
+.contact-form-wrap{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    color: var(--text-color);
+}
 
 /*---------------------------------------
     Product section
