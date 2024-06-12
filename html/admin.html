@@ -60,7 +60,63 @@
                 Admin
             </h2>
         </div>
+        <div class="modal" tabindex="-1" id="addProductModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addProductForm">
+                            <div class="form-group">
+                                <label for="productNameInput">Product Name</label>
+                                <input type="text" class="form-control" id="productNameInput" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productImageInput">Image URL</label>
+                                <input type="url" class="form-control" id="productImageInput" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productCategoryInput">Category</label>
+                                <input type="text" class="form-control" id="productCategoryInput" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productPriceInput">Price</label>
+                                <input type="number" class="form-control" id="productPriceInput" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Product</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>     
+        <div class="container mt-5">
+            <h1 class="mb-4">Product Management</h1>
+            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addProductModal">
+                Add New Product
+            </button>
+            <button type="button" class="btn btn-secondary mb-3" onclick="sortTable()">Sort by Price</button>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Image</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="productTable">
+                    <!-- Dynamic product rows will go here -->
+                     
+                </tbody>
+            </table>
+        </div>
     </main>
+      </div>
 
     <footer class="footer">
         <div class="container">
