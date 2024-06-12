@@ -18,6 +18,45 @@ body {
     background-color: var(--bg-color);
 }
 
+.body {
+    @media (max-width: 767px) {
+        overflow-x: hidden;
+    }
+}
+
+
+/* Desktop size */
+@media (min-width: 1024px) {
+    .body {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+}
+
+/* Laptop size */
+@media (min-width: 992px) and (max-width: 1023px) {
+    .body {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+}
+
+/* Tablet size */
+@media (min-width: 768px) and (max-width: 991px) {
+    .body {
+        max-width: 720px;
+        margin: 0 auto;
+    }
+}
+
+/* Phone size */
+@media (max-width: 767px) {
+    .body {
+        max-width: 480px;
+        margin: 0 auto;
+    }
+}
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -112,6 +151,51 @@ h2, footer p {
     background-color: var(--main-color);
 }
 
+/* VIDEO SECTION */
+
+
+/* VIDEO SECTION */
+
+.video-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.video-container {
+    max-width: 70rem;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 3rem;
+    margin: 0 auto;
+    padding: 1rem;
+    border: 1px solid var(--main-color);
+    border-radius: 0.5rem;
+}
+
+.video-container h2 {
+    font-size: 3rem;
+}
+
+.video-container img {
+    width: 30rem;
+    height: auto;
+    object-fit: contain;
+    border: 1px solid var(--main-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+.video-container p {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+
+
+.video-wrap {
+    width: 50%;
+}
 /*---------------------------------------
     About section
 ----------------------------------------*/
