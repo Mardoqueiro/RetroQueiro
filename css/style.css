@@ -92,6 +92,7 @@ h2, footer p {
     float: right;
 }
 
+
 .retro-btn {
     display: flex;
     justify-content: center;
@@ -110,6 +111,7 @@ h2, footer p {
 .rtr-btn:hover {
     background-color: var(--main-color);
 }
+
 /*---------------------------------------
     About section
 ----------------------------------------*/
