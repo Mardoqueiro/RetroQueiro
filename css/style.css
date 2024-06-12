@@ -115,96 +115,51 @@ h2, footer p {
 /*---------------------------------------
     About section
 ----------------------------------------*/
-.about-section, .store-area {
-    display: grid;
-    grid-gap: 1rem;
-    padding: 1rem;
+.about-title {
     color: var(--text-color);
     text-align: center;
 }
 
-.about-section img, .store-area img {
+.team-img {
+    object-fit: contain;
     width: 100%;
+    height: 100%;
 }
 
-.store-title {
+.team-img:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.team-img {
+    border: 1px solid var(--border-color);
+}
+
+.team-hover-info {
     color: var(--text-color);
-    font-size: 1.5rem;
 }
 
-.store-btn {
-    background-color: var(--accent-color);
-    color: var(--bg-color);
-    padding: .5rem;
+
+.team-foo {
+    border: 1px solid var(--border-color);
     border-radius: .5rem;
-    text-decoration: none;
-    font-size: 1.2rem;
-}
-
-.store-btn:hover {
-    background-color: var(--main-color);
-}
-
-/* Start Choose Us Area */
-.choose-area, .choose-wrap, .choose-container, .single-chooose, .choose-us, .choose-icon, .choose-details {
-    display: grid;
-    grid-gap: 1rem;
     padding: 1rem;
-    color: var(--text-color);
-    text-align: center;
+    transition: transform .3s ease-in-out;
 }
 
-.choose-wrap {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+.team-foo:hover {
+    transform: scale(1.05);
 }
 
-@media screen and (max-width: 768px) {
-    .choose-wrap {
-        grid-template-columns: 1fr;
-    }
+.social-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.choose-icon i {
-    font-size: 3rem;
+.team-name {
+    font-size: min(2rem, 1.5vw);
 }
-
-/* Start Our Team Area */
-.team-area {
-    display: grid;
-    grid-gap: 1rem;
-    padding: 1rem;
-    color: var(--text-color);   
-}
-
-.team-container{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
-    padding: 1rem;
-    color: var(--text-color);
-}
-
-.section-title{
-    color: var(--text-color);
-    font-size: 1.5rem;
-}
-
-.team-foo{
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 1rem;
-    color: var(--text-color);
-}
-
-.team-thumb{
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 1rem;
-    color: var(--text-color);
-}
-
 /*---------------------------------------
     Checkout section
 ----------------------------------------*/
@@ -253,6 +208,8 @@ h2, footer p {
     color: var(--text-color);
 }
 
+
+
 /*---------------------------------------
     Product section
 ----------------------------------------*/
@@ -260,47 +217,64 @@ h2, footer p {
 /*---------------------------------------
     Footer section
 ----------------------------------------*/
+
 .footer {
-    background-color: var(--main-color);
-    color: var(--bg-color);
+    background-color: var(--bg-color);
+    padding: 3rem 0;
+    color: var(--text-color);
 }
 
 .footer-content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 0 2rem;
+    justify-content: center;
+}
+
+.footer-logo {
+    text-align: center;
+}
+
+.footer-logo img {
+    width: 100px;
+}
+
+.footer-contact, .footer-social {
+    text-align: center;
+}
+
+.footer-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.footer-contact p {
+    margin-bottom: 0.5rem;
+}
+
+.social-icons {
+    display: flex;
     gap: 1rem;
 }
 
-@media screen and (max-width: 768px) {
-    .footer-content {
-        grid-template-columns: repeat(1, 1fr);
-    }
-
-    .img-footer,
-    .footer-contact,
-    .footer-social,
-    .footer-title,
-    .social-icons,
-    .footer-copyright,
-    .footer-menu {
-        font-size: 1rem;
-    }
-
-    .img-footer {
-        width: 5rem;
-    }
+.social-icons a {
+    color: var(--text-color);
+    font-size: 1.5rem;
 }
 
-.img-footer,
-.footer-contact,
-.footer-social,
-.footer-title,
-.social-icons,
-.footer-copyright,
-.footer-menu {
-    font-size: 1.2rem;
+.social-icons a:hover {
+    color: var(--main-color);
 }
 
-.img-footer {
-    width: 10rem;
+
+
+.footer {
+    background-color: var(--main-color);
+    color: var(--bg-color);
+}
+
+
+.footer-social {
+    align-self: flex-end;
 }
