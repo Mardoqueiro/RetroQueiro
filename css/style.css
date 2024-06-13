@@ -18,13 +18,6 @@ body {
     background-color: var(--bg-color);
 }
 
-.body {
-    @media (max-width: 767px) {
-        overflow-x: hidden;
-    }
-}
-
-
 /* Desktop size */
 @media (min-width: 1024px) {
     .body {
@@ -169,6 +162,7 @@ h2, footer p {
     padding: 1rem;
     border: 1px solid var(--main-color);
     border-radius: 0.5rem;
+    background-color: var(--main-color);
 }
 
 .video-container h2 {
@@ -189,10 +183,10 @@ h2, footer p {
     font-size: 1.2rem;
 }
 
-
 .video-wrap {
     width: 50%;
 }
+
 /*---------------------------------------
     About section
 ----------------------------------------*/
@@ -254,7 +248,8 @@ body{
 }
 
 .card{
-    box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);    
+    box-shadow: 0 1px 15px 1px rgba(52,40,104,.08); 
+    display: grid;   
 }
 
 .ui-product-color {
@@ -387,6 +382,7 @@ body{
     background-color: var(--bg-color);
     padding: 3rem 0;
     color: var(--text-color);
+
 }
 
 .footer-content {
@@ -394,7 +390,7 @@ body{
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     padding: 0 2rem;
-    justify-content: center;
+    justify-content: space-around;
 }
 
 .footer-logo {
@@ -405,7 +401,8 @@ body{
     width: 100px;
 }
 
-.footer-contact, .footer-social {
+.footer-contact, .footer-social, 
+.social-icons {
     text-align: center;
 }
 
@@ -419,13 +416,14 @@ body{
 }
 
 .social-icons {
-    display: flex;
+    display: grid;
     gap: 1rem;
 }
 
 .social-icons a {
     color: var(--text-color);
     font-size: 1.5rem;
+    align-items: center;
 }
 
 .social-icons a:hover {
@@ -441,5 +439,5 @@ body{
 
 
 .footer-social {
-    align-self: flex-end;
+    align-self: grid;
 }

@@ -5,11 +5,14 @@
 
 let TotalAmount = 0;
 
+console.log("Running checkout script...");
 window.onload = function() {
+  console.log("Running onload function...");
   const productsList = document.getElementById("productsList");
   const checkout = JSON.parse(localStorage.getItem("checkout")) || [];
 
   checkout.forEach(item => {
+    console.log("Processing item:", item);
     const existingItem = checkout.find(
       i => i.name === item.name && i.category === item.category
     );
@@ -33,12 +36,14 @@ window.onload = function() {
 
   const clearCartButton = document.getElementById("clearCartButton");
   clearCartButton.addEventListener("click", function() {
+    console.log("Clearing cart...");
     localStorage.removeItem("checkout");
     window.location.reload();
   });
 
   const displayAlertButton = document.getElementById("displayAlertButton");
   displayAlertButton.addEventListener("click", function() {
+    console.log("Displaying alert...");
     const alert = document.createElement("div");
     alert.classList.add("alert", "alert-success");
     alert.textContent = "Thank you for purchasing";
@@ -58,6 +63,7 @@ if (!wrapper) {
 let checkout = JSON.parse(localStorage.getItem("checkout")) || [];
 let uniqueProducts = Array.from(new Set(checkout.map(item => item.productName)));
 
+console.log("Unique products:", uniqueProducts);
 uniqueProducts.forEach(product => {
   let productObj = checkout.find(item => item.productName === product);
   if (!productObj) {
@@ -91,6 +97,7 @@ if (!clearCart) {
   return;
 }
 clearCart.addEventListener("click", () => {
+  console.log("Clearing cart...");
   localStorage.removeItem("checkout");
   location.reload();
 });
@@ -101,6 +108,7 @@ if (!displayAlert) {
   return;
 }
 displayAlert.addEventListener("click", () => {
+  console.log("Displaying alert...");
   const alert = document.createElement("div");
   alert.classList.add("alert", "alert-success");
   alert.textContent = "Thank you for purchasing";
@@ -111,12 +119,14 @@ displayAlert.addEventListener("click", () => {
 });
 
 let currentYear = new Date().getUTCFullYear();
+console.log("Current year:", currentYear);
 document.querySelector("[currentYear]").textContent = currentYear;
 
 function recentProducts() {
   try {
     const products = JSON.parse(localStorage.getItem("products")) || [];
     const latestProducts = products.slice(-Math.floor(products.length / 2));
+    console.log("Latest products:", latestProducts);
     latestProducts.forEach(product => {
       wrapper.innerHTML += `
         <div class="card">
