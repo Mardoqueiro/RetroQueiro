@@ -184,7 +184,8 @@ h2, footer p {
 }
 
 .video-wrap {
-    width: 50%;
+    /* width: 50%; */
+    width: 50dvw;
 }
 
 /*---------------------------------------
@@ -429,8 +430,6 @@ body{
 .social-icons a:hover {
     color: var(--main-color);
 }
-
-
 
 .footer {
     background-color: var(--main-color);
