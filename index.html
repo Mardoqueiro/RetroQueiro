@@ -13,13 +13,14 @@
     <title>Rétro Quéiro</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top p-3">
+    <header class="navbar navbar-expand sticky-top p-3">
         <div class="container-fluid">
           <a class="navbar-brand" href="./index.html">
             <img src="https://mardoqueiro.github.io/all_images/E-com_/Retro Logo/Yellow Orange Retro Vintage Illustrated Eyeglass Sun Brand Logo.png" alt="logo" loading="lazy">
           </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent">
-            <span class="navbar-toggler-icon"></span>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -30,13 +31,17 @@
                 <a class="nav-link" href="./html/about.html">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./html/admin.html">Admin</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./html/checkout.html">Checkout</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="./html/products.html">Product</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./html/checkout.html">Checkout
+                  <span class="badge rounded-pill bg-success" counter>
+                      0
+                  </span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./html/admin.html">Admin</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="./html/contact.html">Contact</a>
@@ -44,15 +49,12 @@
             </ul>
           </div>
         </div>
-    </nav>
+    </header>
 
     <main class="container" style="background-image:url(https://mardoqueiro.github.io/all_images/E-com_/retro/rotatedBackground.jpg);">
-      <div class="row">
+      <div class="hero">
         <div class="index-container">
           <div class="index-activation">
-            <div class="index-animation">
-              <img class="index-img" src="https://mardoqueiro.github.io/all_images/E-com_/Retro.Mascot/Vinyle.Mascots-removebg-preview.png">
-            </div>
             <div class="index-content">
               <div class="container">
                 <div class="row">
@@ -67,13 +69,14 @@
                   </div>
                 </div>
               </div>
-
+              <div class="index-animation">
+                <img class="index-img" src="https://mardoqueiro.github.io/all_images/E-com_/Retro.Mascot/Vinyle.Mascots-removebg-preview.png">
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="row gap-2 justify-content-center" recentProducts></div>
-
     </main>
 
     <section class="video-area">
@@ -110,7 +113,7 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-logo">
-                <a href="index.html">
+                <a href="./index.html">
                     <img class="img-footer" src="https://mardoqueiro.github.io/all_images/E-com_/Retro Logo/Yellow_Orange_Retro_removebg-preview.png" alt="footer logo">
                 </a>
             </div>
