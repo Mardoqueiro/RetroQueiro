@@ -17,46 +17,35 @@ let checkout = JSON.parse(localStorage.getItem("checkout"))
 // current year
 let currentYear = new Date().getUTCFullYear()
 document.querySelector("[currentYear]").textContent = currentYear
-function recentProducts() {
+
+function displayProducts(products) {
     try{
-        let arrSize = products.length
-        let latestProducts = products.reverse().slice(0, arrSize >> 1)
-        latestProducts.forEach(product => {
-        wrapper.innerHTML += `
-        <div class="card">
-            <img src="${product.image}" class="card-img-top" alt="${product.productName}" loading="lazy">
-            <div class="card-body">
-              <h5 class="card-title">${product.productName}</h5>
-              <h4 class="card-text">${product.category}</h4>
-              <p class="card-text">${product.description}</p>
+        products.forEach(product => {
+            container.innerHTML += `
+            <div class="card">
+                <img src="${product.image}" class="card-img-top" alt="${product.productName}" loading="lazy">
+                <div class="card-body">
+                  <h5 class="card-title">${product.productName}</h5>
+                  <p class="card-text">${product.description}</p>
+                  <p class="card-text">${product.amount}</p>
+                  <button type="button" class="btn btn-primary" onclick='addToCart(${JSON.stringify(product)})'>Add to cart</button>
+                </div>
             </div>
-        </div>
-        `
-    })
+            `
+        })
     } catch (e) {
-        wrapper.textContent = "Please contact our administrator"
+        console.log(e)
     }
 }
 
-try{
-    let products = JSON.parse(
-        localStorage.getItem("products")
-    )
-    let container = document.querySelector("[ourStore]")
-    products.forEach(product => {
-        container.innerHTML += `
-        <div class="card">
-            <img src="${product.image}" class="card-img-top" alt="${product.productName}" loading="lazy">
-            <div class="card-body">
-              <h5 class="card-title">${product.productName}</h5>
-              <p class="card-text">${product.description}</p>
-              <p class="card-text">${product.amount}</p>
-              <button href="#" class="btn btn-primary">Add to cart</button>
-            </div>
-        </div>
-        `
-    })
-} catch (e) {
-    console.log(e)
+displayProducts(products)
+function addToCart(product) {
+    try{
+        checkout.push(product)
+        localStorage.setItem("checkout", JSON.stringify(checkout))
+    }catch(e) {
+        
+    }
+
 }
 
