@@ -1,3 +1,8 @@
+// 
+// 
+// 
+// 
+
 let container = document.querySelector("[ourStore]")
 let searchProduct = document.querySelector("[searchProduct]")
 let sortingByProduct = document.querySelector("[sorting]")
