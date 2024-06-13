@@ -169,7 +169,7 @@ img {
     .hero h1 {
         font-size: 24px;
     }
-}
+
 
 /*---------------------------------------
     RECENT PRODUCTS
@@ -283,6 +283,7 @@ footer {
     color: var(--bg-color);
     padding: 20px 0;
     text-align: center;
+
 }
 
 footer p {
@@ -335,7 +336,6 @@ footer img {
     margin-top: 1rem;
     font-size: 1.2rem;
 }
-
 
 .video-wrap {
     width: 30rem;
