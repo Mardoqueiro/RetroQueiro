@@ -43,3 +43,21 @@ function addToCart(product) {
     }
 
 }
+
+function sortProductsByPrice() {
+    const products = loadProductsFromLocalStorage();
+    products.sort((a, b) => a.price - b.price);
+    // Re-display products after sorting
+  }
+  
+  function searchProductsByName(searchTerm) {
+    const products = loadProductsFromLocalStorage();
+    return products.filter(product =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
+  function filterProductsByCategory(category) {
+    const products = loadProductsFromLocalStorage();
+    return products.filter(product => product.category === category);
+  }
