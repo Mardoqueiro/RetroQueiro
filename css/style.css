@@ -496,3 +496,27 @@ img {
     width: 100px;
     margin: 0 10px;
 }
+  
+  @media (min-width: 1200px) {
+    .container-fluid {
+      max-width: 100%;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container-fluid {
+      max-width: 100%;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .container-fluid {
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 367px) {
+    .container-fluid {
+      max-width: 100%;
+    }
+  }
