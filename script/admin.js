@@ -1,59 +1,95 @@
-function addProduct() {
-    console.log("Running addProduct function...");
-    const productNameInput = document.querySelector("#productName");
-    const categoryInput = document.querySelector("#category");
-    const descriptionInput = document.querySelector("#description");
-    const amountInput = document.querySelector("#amount");
-
-    if (productNameInput && categoryInput && descriptionInput && amountInput) {
-        console.log("All input fields found, checking product data...");
-        const productName = productNameInput.value;
-        const category = categoryInput.value;
-        const description = descriptionInput.value;
-        const amount = parseFloat(amountInput.value);
-
-        if (productName && category && description && !isNaN(amount)) {
-            console.log("Product data valid, adding product...");
-            products.push({
-                id: products.length + 1,
-                productName,
-                category,
-                description,
-                amount,
-                image: "https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.record.player.jpeg" // Replace with actual image URL
-            });
-
-            localStorage.setItem("products", JSON.stringify(products));
-            recentProducts();
-        } else {
-            console.error("Invalid product data");
-        }
-    } else {
-        console.error("Missing product input fields");
+// Function to display admin products
+function displayAdminProducts() {
+    const adminProducts = [
+      { name: "Custom Cassette Bluetooth Speaker by sab_3d", category: "Bluetooth Speaker", quantity: 1, price: 196.00 },
+      { name: "Retro Style Headphones with SD Card and Bluetooth", category: "Headphones", quantity: 1, price: 98.00 },
+      { name: "Vintage Bluetooth Speaker with Display", category: "Bluetooth Speaker", quantity: 1, price: 175.00 },
+      { name: "Classic Portable Record Player", category: "Record Players", quantity: 1, price: 119.00 },
+      { name: "Classic Jukebox with Karaoke and Streaming", category: "Jukeboxes", quantity: 1, price: 385.00 },
+      { name: "Retro Game Boy Gaming Console", category: "Gaming Consoles", quantity: 1, price: 105.00 },
+      // Add more products
+    ];
+    const adminContainer = document.querySelector('.admin tbody');
+    adminProducts.forEach(product => {
+      const productRow = document.createElement('tr');
+      productRow.innerHTML = `
+        <td>${product.name}</td>
+        <td>${product.category}</td>
+        <td>$${product.price}</td>
+        <td>
+          <button onclick="editProduct('${product.name}')">Edit</button>
+          <button onclick="deleteProduct('${product.name}')">Delete</button>
+        </td>
+      `;
+      adminContainer.appendChild(productRow);
+    });
+  }
+  
+  function addProduct() {
+    document.getElementById('productModal').style.display = 'block';
+  }
+  
+  function editProduct(name) {
+    document.getElementById('productModal').style.display = 'block';
+    
+    // Find the product with the given name
+    const product = adminProducts.find(p => p.name === name);
+    
+    // Populate the form with product details
+    document.getElementById('productName').value = product.name;
+    document.getElementById('productCategory').value = product.category;
+    document.getElementById('productPrice').value = product.price;
+    
+  }
+  
+  function deleteProduct(name) {
+    alert(`Product ${name} deleted`);
+    
+    const productIndex = adminProducts.findIndex(product => product.name === name);
+    
+    if (productIndex !== -1) {
+      adminProducts.splice(productIndex, 1);
     }
-}
-
-function editProduct(id) {
-    console.log("Running editProduct function...");
-    const product = products.find(product => product.id === id);
-    if (product) {
-        console.log("Product found, displaying edit form...");
-        document.querySelector("#productName").value = product.productName;
-        document.querySelector("#category").value = product.category;
-        document.querySelector("#description").value = product.description;
-        document.querySelector("#amount").value = product.amount;
-        document.querySelector("#addProduct").style.display = "none";   
-
-        document.querySelector("#editProduct").addEventListener("click", function() {
-            console.log("Running editProduct function...");
-            product.productName = document.querySelector("#productName").value;
-            product.category = document.querySelector("#category").value;
-            product.description = document.querySelector("#description").value;
-            product.amount = parseFloat(document.querySelector("#amount").value);
-            localStorage.setItem("products", JSON.stringify(products));
-            recentProducts();
-        });
+    
+    
+  }
+  
+  document.getElementById('productForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const productName = document.getElementById('productName').value;
+    const productCategory = document.getElementById('productCategory').value;
+    const productPrice = document.getElementById('productPrice').value;
+    
+    let productIndex = adminProducts.findIndex(product => product.name === productName);
+    
+    if (productIndex === -1) {
+      adminProducts.push({
+        name: productName,
+        category: productCategory,
+        quantity: 1,
+        price: productPrice
+      });
     } else {
-        console.error("Product not found");
+      adminProducts[productIndex] = {
+        name: productName,
+        category: productCategory,
+        quantity: 1,
+        price: productPrice
+      };
     }
-}
+    document.getElementById('productModal').style.display = 'none';
+  });
+  
+  document.querySelector('.close').onclick = function() {
+    document.getElementById('productModal').style.display = 'none';
+  };
+  
+  window.onclick = function(event) {
+    if (event.target == document.getElementById('productModal')) {
+      document.getElementById('productModal').style.display = 'none';
+    }
+  };
+  
+  document.addEventListener('DOMContentLoaded', displayAdminProducts);
+  

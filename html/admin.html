@@ -56,10 +56,20 @@
 
     <main class="container-fluid" style="background-image:url(https://mardoqueiro.github.io/all_images/E-com_/retro/rotatedBackground.jpg);">
         <div class="row">
-            <h2 class="display-2">
-                Admin
-            </h2>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="about-content text-center">
+                        <h1 class="about-title">Admin</h1>
+                        <nav class="about-breadcrumb">
+                            <a href="../index.html">Home</a> / <span>Admin</span>
+                        </nav>
+                    </div>
+                </div>
+            </div>
         </div>
+    </main>    
+
+    <section>
         <div class="modal" tabindex="-1" id="addProductModal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -92,51 +102,63 @@
                     </div>
                 </div>
             </div>
-        </div>     
-        <div class="container mt-5">
-            <h1 class="mb-4">Product Management</h1>
-            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addProductModal">
-                Add New Product
-            </button>
-            <button type="button" class="btn btn-secondary mb-3" onclick="sortTable()">Sort by Price</button>
-            <table class="table table-bordered">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Image</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="productTable">
-                    <!-- Dynamic product rows will go here -->
-                     
-                </tbody>
-            </table>
+        </div> 
+    </section>
+    
+    <section class="admin">
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Category</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Admin product items will be dynamically inserted here -->
+          </tbody>
+        </table>
+        <button onclick="addProduct()">Add Product</button>
+      </section>
+      
+      <!-- Modal for adding/editing products -->
+      <div id="productModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <form id="productForm">
+            <label for="productName">Name:</label>
+            <input type="text" id="productName" name="productName" required>
+            <label for="productCategory">Category:</label>
+            <input type="text" id="productCategory" name="productCategory" required>
+            <label for="productPrice">Price:</label>
+            <input type="number" id="productPrice" name="productPrice" required>
+            <button type="submit">Save</button>
+          </form>
         </div>
-    </main>
       </div>
+      
 
       <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <a href="../index.html">
+                    <a href="./index.html">
                         <img class="img-footer" src="https://mardoqueiro.github.io/all_images/E-com_/Retro Logo/Yellow_Orange_Retro_removebg-preview.png" alt="footer logo">
                     </a>
                 </div>
                 <div class="footer-contact">
+                  <a href="../html/contact.html">
                     <h2 class="footer-title">Contact Us</h2>
+                  </a>
                     <p>314 Imam Haron Rd,<br>Lansdowne, Cape Town, 7780</p>
                 </div>
                 <div class="footer-social">
-                    <h2 class="footer-title">Social Media</h2>
-                    <!---->
-                      <a class="social-icons" href="https://twitter.com/devitemsllc" target="_blank"><i class="bi bi-twitter"></i></a>
-                      <a class="social-icons" href="https://www.instagram.com/devitems/" target="_blank"><i class="bi bi-instagram"></i></a>
-                      <a class="social-icons" href="https://www.facebook.com/devitems/?ref=bookmarks" target="_blank"><i class="bi bi-facebook"></i></a>
-                      <a class="social-icons" href="https://plus.google.com/" target="_blank"><i class="bi bi-tiktok"></i></a>
+                    <h4 class="footer-title">Social Media</h4>
+                      <a class="social-icons" href="..." target="_blank"><i class="bi bi-twitter"></i></a>
+                      <a class="social-icons" href="..." target="_blank"><i class="bi bi-instagram"></i></a>
+                      <a class="social-icons" href="..." target="_blank"><i class="bi bi-facebook"></i></a>
+                      <a class="social-icons" href="..." target="_blank"><i class="bi bi-tiktok"></i></a>
                 </div>
                 <div class="footer-copyright">
                     <p>&copy; Retro Queiro <span currentYear></span></p>
@@ -144,6 +166,7 @@
             </div>
         </div>
     </footer>
+    
 
 
     <!-- Bootstrap's script -->

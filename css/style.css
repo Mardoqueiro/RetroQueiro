@@ -169,8 +169,7 @@ img {
     .hero h1 {
         font-size: 24px;
     }
-
-
+}
 /*---------------------------------------
     RECENT PRODUCTS
 ----------------------------------------*/
@@ -239,6 +238,48 @@ img {
     background-color: var(--main-color);
 }
 
+
+/*---------------------------------------
+    Team area
+----------------------------------------*/
+
+.team {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.team h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.team p {
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+
+.team a {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.team a:hover {
+    background-color: var(--main-color);
+}
+
+.team-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 /*---------------------------------------
     CONTACT
 ----------------------------------------*/
@@ -273,17 +314,80 @@ img {
     background-color: var(--main-color);
 }
 
+.contact-form-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.contact-title h2 {
+        font-size: 50px;
+}
+
+.contact-form-warp {
+    max-width: 70rem;
+    margin: 1rem auto;
+    text-align: center;
+    margin-bottom: 3rem;
+    margin: 0 auto;
+    padding: 1rem;
+    border: 1px solid var(--main-color);
+    border-radius: 0.5rem;
+}
+
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+#contact-form label {
+    font-weight: bold;
+}
+
+#contact-form input,
+#contact-form textarea {
+    padding: 0.5rem;
+    border: 1px solid var(--main-color);
+    border-radius: 0.5rem;
+}
+
+#contact-form button {
+    padding: 0.5rem 1rem;
+    background-color: var(--main-color);
+    color: var(--bg-color);
+    border: none;
+    cursor: pointer;
+}
+
+#contact-form button:hover {
+    background-color: var(--bg-color);
+    color: var(--main-color);
+}
+
+
+.single-contact {
+    width: 30rem;
+    margin: 0 auto;
+}
+
 
 /*---------------------------------------
     FOOTER
 ----------------------------------------*/
 
 footer {
-    background-color: var(--text-color);
-    color: var(--bg-color);
+    background-color: var(--accent-color);
+    color: var(--text-color);
     padding: 20px 0;
     text-align: center;
-
+    width: 100%;
+    font-size: 0.8rem;
+    border-top: 2px solid var(--main-color);
 }
 
 footer p {
@@ -302,6 +406,8 @@ footer img {
     width: 40px;
     margin: 0 10px;
 }
+
+
 
 /*---------------------------------------
     Section video-area Styles
@@ -341,3 +447,141 @@ footer img {
     width: 30rem;
     height: auto;
 }
+
+/*---------------------------------------
+    Card
+----------------------------------------*/
+.card{
+    position: relative;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    transition: 1000ms all;
+    transform-origin: center left;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
+    outline: 1px solid var(--main-color);
+    overflow: hidden;
+}
+
+.card:hover{
+    font-weight: bold;
+    cursor: pointer;
+    transform: translateX(22px);
+}
+
+.card:hover figcaption {
+    font-size: 0.5rem;
+    position: absolute;
+    height: 80px; width: 80px;
+    display: flex;
+    align-items: end;
+    background: linear-gradient( to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0) 100%
+    );
+    color: var(--bg-color);
+    left: 0px; bottom: 0px;
+    padding-left: 12px;
+    padding-bottom: 10px;
+}
+
+.card-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 10px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.img-fluid {
+    width: 10opx;
+    height: 100px;
+}
+
+.checkout table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .checkout th, .checkout td {
+    border: 2px solid var(--text-color);
+    padding: 8px;
+  }
+  
+  .checkout button {
+    margin-top: 20px;
+  }
+  
+
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .product-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: 300px;
+  }
+  
+  @media (max-width: 768px) {
+    .product-card {
+      width: 100%;
+    }
+  }
+  
+  .admin table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .admin th, .admin td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .admin button {
+    margin-top: 20px;
+  }
+  
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  

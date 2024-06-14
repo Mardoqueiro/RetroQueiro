@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
     <!-- Custom's styling -->
     <link rel="stylesheet" href="../css/style.css">
     <title>Checkout</title>
@@ -54,182 +55,82 @@
             </div>
         </div>
     </nav>
-    <main class="container-fluid" style="background-image:url(https://mardoqueiro.github.io/all_images/E-com_/retro/rotatedBackground.jpg);">
+    <main class="container-fluid">
         <div class="row">
-            <h2 class="display-2">
-                Checkout
-            </h2>
-            <div class="container px-3 my-5 clearfix">
-                <!-- Shopping cart table -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2>Shopping Cart</h2>
+          <div class="about-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="about-content text-center">
+                            <h1 class="about-title">Check out</h1>
+                            <nav class="about-breadcrumb">
+                                <a href="../index.html">Home</a> / <span>Check out</span>
+                            </nav>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-bordered m-0">
-                            <thead>
-                              <tr>
-                                <!-- Set columns width -->
-                                <th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details</th>
-                                <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
-                                <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
-                                <th class="text-right py-3 px-4" style="width: 100px;">Total</th>
-                                <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                    
-                              <tr>
-                                <td class="p-4">
-                                  <div class="media align-items-center">
-                                    <img src="https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.record.player.jpeg" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                    <div class="media-body">
-                                      <a href="#" class="d-block text-dark">Custom Cassette Bluetooth Speaker by @sab_3d</a>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td class="text-right font-weight-semibold align-middle p-4">R2799.99</td>
-                                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="2"></td>
-                                <td class="text-right font-weight-semibold align-middle p-4">$115.1</td>
-                                <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                              </tr>
-                    
-                              <tr>
-                                <td class="p-4">
-                                  <div class="media align-items-center">
-                                    <img src="https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Headphone.jpeg" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                    <div class="media-body">
-                                      <a href="#" class="d-block text-dark">Retro Style Headphones with SD Card and Bluetooth</a>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td class="text-right font-weight-semibold align-middle p-4">R1399.99</td>
-                                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
-                                <td class="text-right font-weight-semibold align-middle p-4">$1049.00</td>
-                                <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                              </tr>
-                    
-                              <tr>
-                                <td class="p-4">
-                                  <div class="media align-items-center">
-                                    <img src="https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Bluetooth.Speaker.jpeg" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                    <div class="media-body">
-                                      <a href="#" class="d-block text-dark">Vintage Bluetooth Speaker with Display</a>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td class="text-right font-weight-semibold align-middle p-4">R2499.99</td>
-                                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
-                                <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
-                                <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                              </tr>
-                              
-                              <tr>
-                                <td class="p-4">
-                                  <div class="media align-items-center">
-                                    <img src="https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Vinyl.Portable.Turntable.jpeg" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                    <div class="media-body">
-                                      <a href="#" class="d-block text-dark">Classic Portable Record Player</a>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td class="text-right font-weight-semibold align-middle p-4">R1699.99</td>
-                                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
-                                <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
-                                <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                              </tr>
-
-                              <tr>
-                                <td class="p-4">
-                                  <div class="media align-items-center">
-                                    <img src="https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Jukebox.jpeg" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                    <div class="media-body">
-                                      <a href="#" class="d-block text-dark">Classic Jukebox with Karaoke and Streaming</a>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td class="text-right font-weight-semibold align-middle p-4">R5499.99</td>
-                                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
-                                <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
-                                <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                              </tr>
-
-                              <tr>
-                                <td class="p-4">
-                                  <div class="media align-items-center">
-                                    <img src="https://mardoqueiro.github.io/all_images/E-com_/Retro_Products/Retro.Queiro.Gaming.Console.jpeg" class="d-block ui-w-40 ui-bordered mr-4" alt="">
-                                    <div class="media-body">
-                                      <a href="#" class="d-block text-dark">Retro Game Boy Gaming Console</a>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td class="text-right font-weight-semibold align-middle p-4">R1499.99</td>
-                                <td class="align-middle p-4"><input type="text" class="form-control text-center" value="1"></td>
-                                <td class="text-right font-weight-semibold align-middle p-4">$20.55</td>
-                                <td class="text-center align-middle px-0"><a href="#" class="shop-tooltip close float-none text-danger" title="" data-original-title="Remove">×</a></td>
-                              </tr>
-                            </tbody>
-                            </tbody>
-                            </tbody>
-                          </table>
-                        </div>
-                        <!-- / Shopping cart table -->
-                    
-                        <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
-                          <div class="d-flex">
-                            <div class="text-right mt-4 mr-5">
-                              <label class="text-muted font-weight-normal m-0">Discount</label>
-                              <div class="text-large"><strong>R20</strong></div>
-                            </div>
-                            <div class="text-right mt-4">
-                              <label class="text-muted font-weight-normal m-0">Total price</label>
-                              <div class="text-large"><strong>R1164.65</strong></div>
-                            </div>
-                          </div>
-                        </div>
-                    
-                        <div class="float-right">
-                          <div class="retro-btn">
-                            <a class="rtr-btn" href="./checkout.html">Check Out</a>
-                          </div>
-                          <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3">Back to shopping</button>
-                          <button type="button" class="btn btn-lg btn-primary mt-2">Checkout</button>
-                        </div>
-                    
-                      </div>
-                  </div>
-              </div>
-        </div>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <a href="../index.html">
-                        <img class="img-footer" src="https://mardoqueiro.github.io/all_images/E-com_/Retro Logo/Yellow_Orange_Retro_removebg-preview.png" alt="footer logo">
-                    </a>
-                </div>
-                <div class="footer-contact">
-                    <h2 class="footer-title">Contact Us</h2>
-                    <p>314 Imam Haron Rd,<br>Lansdowne, Cape Town, 7780</p>
-                </div>
-                <div class="footer-social">
-                    <h2 class="footer-title">Social Media</h2>
-                    <ul class="social-icons">
-                        <a href="https://twitter.com/devitemsllc" target="_blank"><i class="bi bi-twitter"></i></a>
-                        <a href="https://www.instagram.com/devitems/" target="_blank"><i class="bi bi-instagram"></i></a>
-                        <a href="https://www.facebook.com/devitems/?ref=bookmarks" target="_blank"><i class="bi bi-facebook"></i></a>
-                        <a href="https://plus.google.com/" target="_blank"><i class="bi bi-tiktok"></i></a>
-                    </ul>
-                </div>
-                <div class="footer-copyright">
-                    <p>&copy; Retro Queiro <span currentYear></span></p>
                 </div>
             </div>
         </div>
-    </footer>
+    </main>
+
+    <section class="checkout">
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Cart items will be dynamically inserted here -->
+          <script>
+            let cartProducts = JSON.parse(localStorage.getProducts("cart")) || [];
+            cartProducts.forEach(products => {
+              let row = `<tr>
+                <td>${product.productName}</td>
+                <td>${product.category}</td>
+                <td><input type="number" class="form-control text-center">${product.quantity}</td>
+                <td>${product.amount}</td>
+              </tr>`;
+              document.querySelector("tbody").innerHTML += row;
+            });
+          </script>
+        </tbody>
+      </table>
+      <button class="rtr-btn" onclick="clearCart()">Clear Cart</button>
+      <button class="rtr-btn" onclick="thankYou()">Checkout</button>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+          <div class="footer-content">
+              <div class="footer-logo">
+                  <a href="./index.html">
+                      <img class="img-footer" src="https://mardoqueiro.github.io/all_images/E-com_/Retro Logo/Yellow_Orange_Retro_removebg-preview.png" alt="footer logo">
+                  </a>
+              </div>
+              <div class="footer-contact">
+                <a href="../html/contact.html">
+                  <h2 class="footer-title">Contact Us</h2>
+                </a>
+                  <p>314 Imam Haron Rd,<br>Lansdowne, Cape Town, 7780</p>
+              </div>
+              <div class="footer-social">
+                  <h4 class="footer-title">Social Media</h4>
+                    <a class="social-icons" href="..." target="_blank"><i class="bi bi-twitter"></i></a>
+                    <a class="social-icons" href="..." target="_blank"><i class="bi bi-instagram"></i></a>
+                    <a class="social-icons" href="..." target="_blank"><i class="bi bi-facebook"></i></a>
+                    <a class="social-icons" href="..." target="_blank"><i class="bi bi-tiktok"></i></a>
+              </div>
+              <div class="footer-copyright">
+                  <p>&copy; Retro Queiro <span currentYear></span></p>
+              </div>
+          </div>
+      </div>
+  </footer>
+  
 
     <!-- Bootstrap's script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
