@@ -1,4 +1,7 @@
-// Function to display admin products
+let admin = JSON.parse(localStorage.getItem("admin"))
+    ? JSON.parse(localStorage.getItem("admin"))
+    : []
+
 function displayAdminProducts() {
     const adminProducts = [
       { name: "Custom Cassette Bluetooth Speaker by sab_3d", category: "Bluetooth Speaker", quantity: 1, price: 196.00 },

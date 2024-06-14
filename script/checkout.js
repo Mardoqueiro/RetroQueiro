@@ -12,7 +12,6 @@ function displayCartProducts() {
     { name: "Classic Portable Record Player", category: "Record Players", quantity: 1, price: 119.00 },
     { name: "Classic Jukebox with Karaoke and Streaming", category: "Jukeboxes", quantity: 1, price: 385.00 },
     { name: "Retro Game Boy Gaming Console", category: "Gaming Consoles", quantity: 1, price: 105.00 },
-    // Add more items
   ];
   const cartContainer = document.querySelector('.checkout tbody');
   cart.forEach(products => {
