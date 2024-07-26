@@ -39,10 +39,8 @@
                         <a class="nav-link" href="./products.html">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./checkout.html">Checkout
-                            <span class="badge rounded-pill bg-success" counter>
-                                0
-                            </span>
+                        <a class="nav-link" href="./checkout.html">Cart
+                            <span class="badge bg-warning rounded-pill" counter>0</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -59,48 +57,41 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="about-content text-center">
-                    <h1 class="about-title">Checkout</h1>
+                    <h1 class="about-title">Cart</h1>
                     <nav class="about-breadcrumb">
-                        <a href="../index.html">Home</a> / <span>Checkout</span>
+                        <a href="../index.html">Home</a> / <span>Cart</span>
                     </nav>
                 </div>
             </div>
+        </div>  
+       <table>
+           <thead>
+               <tr>
+                   <th>Product Name</th>
+                   <th>Category</th>
+                   <th>Product</th>
+                   <th>Description</th>
+                   <th>Quantity</th>
+                   <th>Price</th>
+                   <th>Action</th>
+               </tr>
+           </thead>
+           <tbody id="checkoutTableBody">
+           </tbody>
+       </table>
+       <button id="clearBtn" class="btn btn-secondary" onclick="clearCart()">Clear Cart</button>
+       <button id="payNowBtn" class="btn btn-secondary" onclick="payNow()">Pay Now</button>
+     
+       <div class="spinner-wrapper d-flex justify-content-center">
+           <div class="spinner-border" role="status">
+             <span class="visually-hidden">Loading...</span>
+           </div>
+
+       </div>
+       <div class="index-animation">
+        <img class="index-img" src="https://mardoqueiro.github.io/all_images/E-com_/Retro.Mascot/Outlin.Mascots-removebg-preview.png" alt="Retro Mascot">
         </div>
     </main>
-
-    <section>
-      <table class="checkout">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Category</th>
-            <th>Quantity</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Cart items will be dynamically inserted here -->
-          <script>
-            let cartProducts = JSON.parse(localStorage.getProducts("cart")) || [];
-            cartProducts.forEach(products => {
-              let row = `<tr>
-                <td>${product.productName}</td>
-                <td>${product.category}</td>
-                <td><input type="number" class="form-control text-center">${product.quantity}</td>
-                <td>${product.amount}</td>
-              </tr>`;
-              document.querySelector("tbody").innerHTML += row;
-            });
-          </script>
-        </tbody>
-      </table>
-      <button class="rtr-btn" onclick="clearCart()">Clear Cart</button>
-      <button class="ctr-btn" onclick="thankYou()">Checkout</button>
-
-      <div class="index-animation">
-        <img class="index-img" src="https://mardoqueiro.github.io/all_images/E-com_/Retro.Mascot/Outlin.Mascots-removebg-preview.png" alt="Retro Mascot">
-      </div>
-    </section>
 
     <footer class="footer">
         <div class="container-fluid">

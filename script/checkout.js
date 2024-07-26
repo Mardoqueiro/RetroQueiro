@@ -1,37 +1,110 @@
-//  The checkout page products that were added to the cart must be displayed without a duplicate. Provide the details of each product, such
-// as product name, category, quantity, and amount (single price * quantity = amount). In addition, you need to include
-// the amount due or the total amount the user must pay. Include a button to clear all products on the cart and another
-// button to display a custom or bootstrap alert ("Thank you for purchasing").
+document.querySelector("[currentYear]").textContent =
+  new Date().getUTCFullYear();
 
-// Function to display cart items
-function displayCartProducts() {
-  const cart = [
-    { name: "Custom Cassette Bluetooth Speaker by sab_3d", category: "Bluetooth Speaker", quantity: 1, price: 196.00 },
-    { name: "Retro Style Headphones with SD Card and Bluetooth", category: "Headphones", quantity: 1, price: 98.00 },
-    { name: "Vintage Bluetooth Speaker with Display", category: "Bluetooth Speaker", quantity: 1, price: 175.00 },
-    { name: "Classic Portable Record Player", category: "Record Players", quantity: 1, price: 119.00 },
-    { name: "Classic Jukebox with Karaoke and Streaming", category: "Jukeboxes", quantity: 1, price: 385.00 },
-    { name: "Retro Game Boy Gaming Console", category: "Gaming Consoles", quantity: 1, price: 105.00 },
-  ];
-  const cartContainer = document.querySelector('.checkout tbody');
-  cart.forEach(products => {
-    const cartRow = document.createElement('tr');
-    cartRow.innerHTML = `
-      <td>${products.name}</td>
-      <td>${products.category}</td>
-      <td>${products.quantity}</td>
-      <td>$${products.price * products.quantity}</td>
-    `;
-    cartContainer.appendChild(cartRow);
+let checkoutItems = JSON.parse(localStorage.getItem("checkout")) || [];
+
+function displayCheckoutItems() {
+  const checkoutTableBody = document.getElementById("checkoutTableBody");
+  checkoutTableBody.innerHTML = "";
+  let total = 0;
+
+  checkoutItems.forEach((item, index) => {
+    const row = document.createElement("tr");
+    const itemTotalPrice = item.price * (item.quantity || 1); // Multiply price by quantity
+    row.innerHTML = `
+            <td>${item.productName}</td>
+            <td>${item.category}</td>
+            <td><img src="${item.image}" alt="${
+      item.productName
+    }" width="100"></td>
+            <td>${item.description}</td>
+            <td>
+                <input type="number" min="1" value="${
+                  item.quantity || 1
+                }" onchange="updateQuantity(${index}, this.value)">
+            </td> 
+            <td>R${itemTotalPrice.toFixed(2)}</td>
+            <td><button class="btn remove-btn btn-danger" onclick="removeItem(${index})">Remove</button></td>
+        `;
+    checkoutTableBody.appendChild(row);
+    total += itemTotalPrice; // Add total price of items
   });
+
+  const totalRow = document.createElement("tr");
+  totalRow.classList.add("total-row");
+  totalRow.innerHTML = `
+        <td colspan="7">Total: R ${total.toFixed(2)}</td>
+    `;
+  checkoutTableBody.appendChild(totalRow);
+}
+
+function addItemToCart(product) {
+  const existingItemIndex = checkoutItems.findIndex(
+    (item) => item.productName === product.productName
+  );
+  if (existingItemIndex !== -1) {
+    // Product already exists in cart, update quantity
+    checkoutItems[existingItemIndex].quantity += 1;
+  } else {
+    // Product doesn't exist in cart, add it
+    checkoutItems.push({ ...product, quantity: 1 });
+  }
+  localStorage.setItem("checkout", JSON.stringify(checkoutItems));
+  displayCheckoutItems();
+}
+
+function removeItem(index) {
+  const removedQuantity = checkoutItems[index].quantity; // Get the quantity of the item being removed
+  checkoutItems.splice(index, 1); // Remove the item from checkoutItems array
+  localStorage.setItem("checkout", JSON.stringify(checkoutItems)); // Update localStorage
+  displayCheckoutItems(); // Re-render the checkout items table
+  updateCartCounter(-removedQuantity); // Update the cart counter by subtracting the removed quantity
+}
+
+function updateQuantity(index, quantity) {
+  checkoutItems[index].quantity = parseInt(quantity); // Update quantity in checkoutItems array
+  localStorage.setItem("checkout", JSON.stringify(checkoutItems));
+  displayCheckoutItems(); // Re-render the checkout items table
+  updateCartCounter(); // Update the cart counter badge
+}
+
+displayCheckoutItems();
+
+//  Function to handle payment
+function payNow() {
+  if (checkoutItems.length === 0) {
+    alert("Your cart is empty. Please add items to proceed.");
+    return;
+  }
+  // Implement payment logic here
+  else {
+    alert("Thank you for your Order!");
+  }
 }
 
 function clearCart() {
-  alert('Cart cleared');
+  checkoutItems = [];
+  localStorage.setItem("checkout", JSON.stringify(checkoutItems));
+  displayCheckoutItems();
 }
 
-function thankYou() {
-  alert('Thank you for purchasing');
+// Update counter on page load
+window.onload = () => {
+  updateCartCounter();
+};
+
+// Function to update the counter badge
+function updateCartCounter() {
+  const totalQuantity = checkoutItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+  document.querySelector("[counter]").textContent = totalQuantity || 0;
 }
 
-document.addEventListener('DOMContentLoaded', displayCartProducts);
+//   Spinner
+let spinnerWrapper = document.querySelector(".spinner-wrapper");
+
+setTimeout(() => {
+  spinnerWrapper.style.opacity = 0;
+}, 200);
