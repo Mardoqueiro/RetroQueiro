@@ -64,82 +64,153 @@
                 </div>
             </div>
         </div>
-    </main>
-       
-    <section class="container-fluid">
-        <div class="modal" tabindex="-1" id="addProductModal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add New Product</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="addProductForm">
-                            <div class="form-group">
-                                <label for="productNameInput">Product Name</label>
-                                <input type="text" class="form-control" id="productNameInput" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="productImageInput">Image</label>
-                                <input type="url" class="form-control" id="productImageInput" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="productCategoryInput">Category</label>
-                                <input type="text" class="form-control" id="productCategoryInput" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="productPriceInput">Price</label>
-                                <input type="number" class="form-control" id="productPriceInput" required>
-                            </div>
-                            <button type="submit" class="ctr-btn">Add Product</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> 
         
-    </section>
-    
-    <section>
-        <table class="admin">
+        <div class="row justify-content-between my-2 d-block d-md-flex p-2">
+          <div class="col">
+            <input
+              class="form-control Search-bar"
+              type="text"
+              placeholder="Search product by name"
+              searchProduct
+            />
+          </div>
+          <div class="col">
+            <button class="btn btn-secondary sort" type="button" sorting id="but">
+              Sorting
+            </button>
+          </div>
+          <div class="col">
+            <button id="addNewProductBtn" class="btn btn-secondary" >
+              Add New Product
+            </button>
+          </div>
+        </div>
+  
+        <table id="productTable">
           <thead>
             <tr>
-              <th>Product</th>
+              <th>ID</th>
+              <th>Product Name</th>
               <th>Category</th>
+              <th>Description</th>
               <th>Price</th>
-              <th>Actions</th>
+              <th>Image</th>
+              <th>Edit Item</th>
+              <th>Remove Item</th>
             </tr>
           </thead>
-          <tbody>
-            <!-- Admin product items will be dynamically inserted here -->
+          <tbody id="productTableBody">
+            <!-- Product rows will be dynamically added here -->
           </tbody>
         </table>
-        <button onclick="addProduct()">Add Product</button>
-        <div class="index-animation">
-            <img class="index-img" src="https://mardoqueiro.github.io/all_images/E-com_/Retro.Mascot/Brain.Mascots-removebg-preview.png" alt="Retro Mascot">
-        </div>
-      </section>
-      
-      <!-- Modal for adding/editing products -->
-      <div id="productModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <form id="productForm">
-            <label for="productName">Name:</label>
-            <input type="text" id="productName" name="productName" required>
-            <label for="productCategory">Category:</label>
-            <input type="text" id="productCategory" name="productCategory" required>
-            <label for="productPrice">Price:</label>
-            <input type="number" id="productPrice" name="productPrice" required>
-            <button type="submit">Save</button>
-          </form>
+  
+        <div class="spinner-wrapper d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+  
+      </main>
+  
+      <div
+        class="modal fade"
+        id="addProductModal"
+        tabindex="-1"
+        aria-labelledby="addProductModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addProductModalLabel">
+                Add New Product
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-4">
+                <label for="productName" class="form-label">Product Name</label>
+                <input type="text" class="form-control" id="productName" />
+              </div>
+              <div class="mb-4">
+                <label for="category" class="form-label">Category</label>
+                <input type="text" class="form-control" id="category" />
+              </div>
+              <div class="mb-4">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" />
+              </div>
+              <div class="mb-4">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" />
+              </div>
+              <div class="mb-4">
+                <label for="imageUrl" class="form-label">Image URL</label>
+                <input type="text" class="form-control" id="imageUrl" />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                id="saveProductChangesBtn"
+              >
+                Save Changes
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-      
-
+  
+      <!-- Bootstrap Modal for Error Messages -->
+      <div
+        class="modal fade"
+        id="errorModal"
+        tabindex="-1"
+        aria-labelledby="errorModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="errorModalLabel">Warning</h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body" id="errorModalBody">
+              <p>Are you sure you want to remove this product?</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-secondary">
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
       <footer class="footer">
         <div class="container-fluid">
             <div class="footer-content">
