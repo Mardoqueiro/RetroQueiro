@@ -239,16 +239,17 @@ img {
 /* Card Styling */
 .card1 {
   margin: 20px;
-  border: none;
-  border-radius: 8px;
+  border: 2px solid #FF9F66; /* Retro border color */
+  border-radius: 12px; /* Slightly rounded corners */
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Softer shadow for a retro feel */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #FFF8E1; /* Light retro background color */
 }
 
 .card1:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
 }
 
 .card-img-top {
@@ -262,10 +263,10 @@ img {
 }
 
 .card-title {
-  font-size: 1.25rem;
+  font-size: 1.5rem; /* Slightly larger title */
   font-weight: bold;
   margin-bottom: 10px;
-  color: #343a40;
+  color: #FF5F00; /* Retro accent color */
 }
 
 .card-body a {

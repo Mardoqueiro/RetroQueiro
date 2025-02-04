@@ -10,7 +10,7 @@ function displayCheckoutItems() {
 
   checkoutItems.forEach((item, index) => {
     const row = document.createElement("tr");
-    const itemTotalPrice = item.price * (item.quantity || 1); // Multiply price by quantity
+    const itemTotalPrice = item.price * (item.quantity || 1); 
     row.innerHTML = `
             <td>${item.productName}</td>
             <td>${item.category}</td>
@@ -27,7 +27,7 @@ function displayCheckoutItems() {
             <td><button class="btn remove-btn btn-danger" onclick="removeItem(${index})">Remove</button></td>
         `;
     checkoutTableBody.appendChild(row);
-    total += itemTotalPrice; // Add total price of items
+    total += itemTotalPrice;
   });
 
   const totalRow = document.createElement("tr");
@@ -43,10 +43,8 @@ function addItemToCart(product) {
     (item) => item.productName === product.productName
   );
   if (existingItemIndex !== -1) {
-    // Product already exists in cart, update quantity
     checkoutItems[existingItemIndex].quantity += 1;
   } else {
-    // Product doesn't exist in cart, add it
     checkoutItems.push({ ...product, quantity: 1 });
   }
   localStorage.setItem("checkout", JSON.stringify(checkoutItems));
@@ -54,29 +52,27 @@ function addItemToCart(product) {
 }
 
 function removeItem(index) {
-  const removedQuantity = checkoutItems[index].quantity; // Get the quantity of the item being removed
-  checkoutItems.splice(index, 1); // Remove the item from checkoutItems array
-  localStorage.setItem("checkout", JSON.stringify(checkoutItems)); // Update localStorage
-  displayCheckoutItems(); // Re-render the checkout items table
-  updateCartCounter(-removedQuantity); // Update the cart counter by subtracting the removed quantity
+  const removedQuantity = checkoutItems[index].quantity; 
+  checkoutItems.splice(index, 1); 
+  localStorage.setItem("checkout", JSON.stringify(checkoutItems)); 
+  displayCheckoutItems(); 
+  updateCartCounter(-removedQuantity); 
 }
 
 function updateQuantity(index, quantity) {
-  checkoutItems[index].quantity = parseInt(quantity); // Update quantity in checkoutItems array
+  checkoutItems[index].quantity = parseInt(quantity); 
   localStorage.setItem("checkout", JSON.stringify(checkoutItems));
-  displayCheckoutItems(); // Re-render the checkout items table
-  updateCartCounter(); // Update the cart counter badge
+  displayCheckoutItems(); 
+  updateCartCounter(); 
 }
 
 displayCheckoutItems();
 
-//  Function to handle payment
 function payNow() {
   if (checkoutItems.length === 0) {
     alert("Your cart is empty. Please add items to proceed.");
     return;
   }
-  // Implement payment logic here
   else {
     alert("Thank you for your Order!");
   }
@@ -88,12 +84,10 @@ function clearCart() {
   displayCheckoutItems();
 }
 
-// Update counter on page load
 window.onload = () => {
   updateCartCounter();
 };
 
-// Function to update the counter badge
 function updateCartCounter() {
   const totalQuantity = checkoutItems.reduce(
     (total, item) => total + item.quantity,
@@ -102,7 +96,6 @@ function updateCartCounter() {
   document.querySelector("[counter]").textContent = totalQuantity || 0;
 }
 
-//   Spinner
 let spinnerWrapper = document.querySelector(".spinner-wrapper");
 
 setTimeout(() => {

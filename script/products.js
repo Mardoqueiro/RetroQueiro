@@ -77,34 +77,33 @@ let products = JSON.parse(localStorage.getItem("products"))
       ])
     );
 
+// Initialize the cart
+let checkoutItems = JSON.parse(localStorage.getItem("checkout")) || [];
+
+// Function to display products (make sure this is called to render products)
 function displayProducts(products) {
-  container.innerHTML = "";
-  products.forEach((product) => {
-    // Add product card
-    container.innerHTML += `
-              <div class="col">
+    container.innerHTML = ""; // Clear existing products
+
+    products.forEach((product) => {
+        container.innerHTML += `
+            <div class="col">
                 <div class="card">
-                    <img src="${product.image}" class="card-img-top" alt="${
-      product.productName
-    }" id="cardImg${product.id}">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <div class="card-text-bottom">
-                          <h5 class="card-title">${product.productName}</h5>
-                          <p class="card-text1">${product.description}</p>
-                         </div>
+                    <img src="${product.image}" class="card-img-top" alt="${product.productName}">
+                    <div class="card-body">
+                        <h5 class="card-title">${product.productName}</h5>
+                        <p class="card-text">${product.description}</p>
+                        <p class="card-text">Amount: R ${product.amount}</p>
+                        <button class="btn btn-primary add-to-cart" data-id="${product.id}">Add to Cart</button>
                     </div>
-                    <div>
-                      <p class="card-text2">Amount: R ${product.amount}</p>
-                      <button type='button' class="btn btn-secondary align-self-end" id="btn${
-                        product.id
-                      }" onclick='addToCart(${JSON.stringify(
-      product
-    )})'>Add to cart</button>
-                    </div
                 </div>
-              </div>
-            `;
-  });
+            </div>
+        `;
+    });
+
+    // Add event listeners to "Add to Cart" buttons
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', addToCart);
+    });
 }
 
 displayProducts(products);
@@ -146,30 +145,27 @@ sortingByAmount.addEventListener("click", () => {
   }
 });
 
-// Add to cart functionality
-function addToCart(product) {
-  try {
-    const existingItem = checkoutItems.find((item) => item.id === product.id);
-    if (existingItem) {
-      // Product already exists in cart, update quantity
-      existingItem.quantity += 1;
-    } else {
-      // Product doesn't exist in cart, add it
-      checkoutItems.push({ ...product, quantity: 1 });
+// Function to add product to cart
+function addToCart(event) {
+    const productId = event.target.getAttribute('data-id');
+    const products = JSON.parse(localStorage.getItem("products")) || [];
+    
+    // Find the product by ID
+    const product = products.find(p => p.id == productId);
+    if (product) {
+        // Check if the product is already in the cart
+        const existingItem = checkoutItems.find(item => item.id === product.id);
+        if (existingItem) {
+            // Product already exists in cart, update quantity
+            existingItem.quantity += 1;
+        } else {
+            // Product doesn't exist in cart, add it
+            checkoutItems.push({ ...product, quantity: 1 });
+        }
+        localStorage.setItem("checkout", JSON.stringify(checkoutItems));
+        alert(`${product.productName} has been added to your cart!`);
+        updateCartCounter(); // Update cart counter if you have this function
     }
-    localStorage.setItem("checkout", JSON.stringify(checkoutItems));
-
-    // Calculate the total quantity of items in the cart, including duplicates
-    const totalQuantity = checkoutItems.reduce(
-      (total, item) => total + item.quantity,
-      0
-    );
-
-    // Update the counter badge
-    document.querySelector("[counter]").textContent = totalQuantity || 0;
-  } catch (error) {
-    alert("Unable to add product to cart. Please try again.");
-  }
 }
 
 document
@@ -187,13 +183,10 @@ window.onload = () => {
   updateCartCounter();
 };
 
-// Function to update the counter badge
+// Function to update cart counter
 function updateCartCounter() {
-  const totalQuantity = checkoutItems.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
-  document.querySelector("[counter]").textContent = totalQuantity || 0;
+    const totalQuantity = checkoutItems.reduce((total, item) => total + item.quantity, 0);
+    document.querySelector("[counter]").textContent = totalQuantity || 0;
 }
 
 let spinnerWrapper = document.querySelector(".spinner-wrapper");
