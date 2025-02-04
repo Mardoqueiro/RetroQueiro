@@ -82,6 +82,7 @@ function recentProducts() {
                 <div class="card-body">
                   <h5 class="card-title">${product.productName}</h5>
                   <p class="card-text">${product.description}</p>
+                  <button class="btn btn-primary add-to-cart" data-id="${product.id}">Add to Cart</button> <!-- Add this line -->
                 </div>
             </div>
             `;
