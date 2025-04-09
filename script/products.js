@@ -91,8 +91,8 @@ function displayProducts(products) {
                     <img src="${product.image}" class="card-img-top" alt="${product.productName}">
                     <div class="card-body">
                         <h5 class="card-title">${product.productName}</h5>
-                        <p class="card-text">${product.description}</p>
-                        <p class="card-text">Amount: R ${product.amount}</p>
+                        <p class="card-text">${product.description.substring(0, 100)}...</p>
+                        <p class="card-text">R ${product.amount.toFixed(2)}</p>
                         <button class="btn btn-primary add-to-cart" data-id="${product.id}">Add to Cart</button>
                     </div>
                 </div>
@@ -195,54 +195,3 @@ setTimeout(() => {
   spinnerWrapper.style.opacity = 0;
 }, 200);
 
-
-// MINE
-// function displayProducts(products) {
-//   try {
-//     products.forEach((product) => {
-//       container.innerHTML += `
-//             <div class="card">
-//                 <img src="${product.image}" class="card-img-top" alt="${
-//         product.productName
-//       }" loading="lazy">
-//                 <div class="card-body">
-//                   <h5 class="card-title">${product.productName}</h5>
-//                   <p class="card-text">${product.description}</p>
-//                   <p class="card-text">${product.amount}</p>
-//                   <button type="button" class="btn btn-primary" onclick='addToCart(${JSON.stringify(
-//                     product
-//                   )})'>Add to cart</button>
-//                 </div>
-//             </div>
-//             `;
-//     });
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
-
-// displayProducts(products);
-// function addToCart(product) {
-//   try {
-//     checkout.push(product);
-//     localStorage.setItem("checkout", JSON.stringify(checkout));
-//   } catch (e) {}
-// }
-
-// function sortProductsByPrice() {
-//   const products = loadProductsFromLocalStorage();
-//   products.sort((a, b) => a.price - b.price);
-//   // Re-display products after sorting
-// }
-
-// function searchProductsByName(searchTerm) {
-//   const products = loadProductsFromLocalStorage();
-//   return products.filter((product) =>
-//     product.name.toLowerCase().includes(searchTerm.toLowerCase())
-//   );
-// }
-
-// function filterProductsByCategory(category) {
-//   const products = loadProductsFromLocalStorage();
-//   return products.filter((product) => product.category === category);
-// }
