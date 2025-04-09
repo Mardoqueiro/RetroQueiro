@@ -103,38 +103,38 @@ img {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap; /* Ensures responsiveness on smaller screens */
+    flex-wrap: wrap; 
   }
   
   .index-content {
     flex: 1;
-    max-width: 50%; /* Adjust as needed */
+    max-width: 50%; 
     margin-bottom: 5rem;
   }
   
   .index-animation {
     flex: 1;
-    text-align: right; /* Align the image to the right */
+    text-align: right;
   }
   
   .index-img {
-    max-width: 100%;
-    height: auto; /* Ensure the image scales nicely */
+    max-width: auto;
+    height: 100%; 
   }
   
   @media (max-width: 768px) {
     .container {
-      flex-direction: column; /* Stack items vertically on smaller screens */
+      flex-direction: column; 
       align-items: center;
     }
   
     .index-content, .index-animation {
       max-width: 100%;
-      text-align: center; /* Center text and image on smaller screens */
+      text-align: center;
     }
   
     .index-img {
-      margin-top: 20px; /* Add some spacing between text and image */
+      margin-top: 20px; 
     }
   }
   
@@ -146,30 +146,30 @@ img {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap; /* Ensures responsiveness on smaller screens */
+    flex-wrap: wrap; 
   }
   
   .index-animation {
     flex: 1;
-    max-width: 50%; /* Adjust as needed */
-    text-align: left; /* Align the image to the left */
+    max-width: 50%; 
+    text-align: left; 
   }
   
   .video-img {
     max-width: 100%;
-    height: auto; /* Ensure the image scales nicely */
+    height: auto; 
   }
   
   .video-wrap1 {
     flex: 1;
-    max-width: 50%; /* Adjust as needed */
+    max-width: 50%;
   }
   
   .video-container {
-    border: 2px solid var(--accent-color); /* Border around the text area */
+    border: 2px solid var(--accent-color); 
     padding: 20px;
-    background-color: var(--main-color); /* Optional: Add background color */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Add a shadow for better visibility */
+    background-color: var(--main-color); 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 15px;
   }
   
@@ -179,17 +179,17 @@ img {
   
   @media (max-width: 768px) {
     .container-video {
-      flex-direction: column; /* Stack items vertically on smaller screens */
+      flex-direction: column; 
       align-items: center;
     }
   
     .index-animation, .video-wrap1 {
       max-width: 100%;
-      text-align: center; /* Center text and image on smaller screens */
+      text-align: center;
     }
   
     .video-img {
-      margin-bottom: 20px; /* Add some spacing between image and text on smaller screens */
+      margin-bottom: 20px; 
     }
   
     .video-container {
@@ -206,8 +206,6 @@ img {
 }
 
 /* Team Area Styling */
-
-
 .about-title {
   margin-bottom: 40px;
 }
@@ -239,17 +237,17 @@ img {
 /* Card Styling */
 .card1 {
   margin: 20px;
-  border: 2px solid #FF9F66; /* Retro border color */
-  border-radius: 12px; /* Slightly rounded corners */
+  border: 2px solid #FF9F66; 
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Softer shadow for a retro feel */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: #FFF8E1; /* Light retro background color */
+  background-color: #FFF8E1; 
 }
 
 .card1:hover {
-  transform: translateY(-5px); /* Slight lift on hover */
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+  transform: translateY(-5px); 
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); 
 }
 
 .card-img-top {
@@ -263,10 +261,10 @@ img {
 }
 
 .card-title {
-  font-size: 1.5rem; /* Slightly larger title */
+  font-size: 1.5rem; 
   font-weight: bold;
   margin-bottom: 10px;
-  color: #FF5F00; /* Retro accent color */
+  color: #FF5F00; 
 }
 
 .card-body a {
@@ -398,7 +396,7 @@ button.btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
+  height: 100vh; 
 }
 
 .index-img {
@@ -475,7 +473,7 @@ button.btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
+    height: 100%; 
 }
 
 .index-img {
@@ -657,32 +655,32 @@ button.btn {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap; /* Ensures responsiveness on smaller screens */
+    flex-wrap: wrap; 
   }
   
   .footer-logo,
   .footer-contact,
   .footer-social {
     flex: 1;
-    max-width: 33%; /* Adjust as needed */
-    text-align: center; /* Center text */
+    max-width: 33%; 
+    text-align: center; 
   }
   
   .footer-logo {
-    text-align: left; /* Align logo to the left */
+    text-align: left; 
   }
   
   .footer-contact {
-    text-align: center; /* Center contact information */
+    text-align: center; 
   }
   
   .footer-social {
-    text-align: right; /* Align social media links to the right */
+    text-align: right; 
   }
   
   .footer-title {
     margin-top: 0;
-    font-size: 18px; /* Adjust font size as needed */
+    font-size: 18px; 
   }
   
   .footer-social .social-icons {
@@ -692,7 +690,7 @@ button.btn {
   .footer-copyright {
     text-align: center;
     margin-top: 20px;
-    flex: 1 0 100%; /* Make it span the full width */
+    flex: 1 0 100%;
   }
   
   @media (max-width: 768px) {
@@ -706,7 +704,7 @@ button.btn {
     .footer-social {
       max-width: 100%;
       text-align: center;
-      margin-bottom: 20px; /* Add some spacing between sections */
+      margin-bottom: 20px; 
     }
   
     .footer-social .social-icons {
