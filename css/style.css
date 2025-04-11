@@ -253,15 +253,11 @@ nav ul {
 }
 
 nav li {
-  margin-left: 20px;
+  margin-left: 18px;
 }
 
 nav a {
   font-size: 18px;
-}
-
-nav a:hover {
-  text-decoration: underline;
 }
 
 .navbar img[alt='logo'] {
@@ -279,6 +275,47 @@ img {
   object-fit: cover;
   object-position: center;
 }
+
+.link-113 {
+  color: #ffffff;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.link-113::before,
+.link-113::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #ffffff;
+  transition: all 0.5s;
+}
+
+.link-113::before {
+  top: 0;
+  left: 0;
+}
+
+.link-113::after {
+  bottom: 0;
+  right: 0;
+}
+
+.link-113:hover::before {
+  width: 100%;
+  transition: width 0.25s ease-in-out;
+}
+
+.link-113:hover::after {
+  width: 100%;
+  transition: width 0.25s ease-in-out 0.25s;
+}
+
 
 /*---------------------------------------
     HERO
@@ -387,7 +424,7 @@ img {
     BUTTONS
 ----------------------------------------*/
 .button {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 600;
   font-family: monospace;
   text-transform: uppercase;
@@ -396,7 +433,7 @@ img {
   border: none;
   cursor: pointer;
   display: inline-block;
-  padding: 12px 35px;
+  padding: 10px 25px;
   border-radius: 8px;
   background: #f6781e;
   color: #fff;
@@ -478,14 +515,14 @@ img {
 .card-title {
   font-family: 'Courier New', Courier, monospace;
   font-size: 1.3rem;
-  color: #f4f4f4;
+  color: var(--text-color);
   margin-top: 10px;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 .card-body {
-  background-color: #2c2c2c;
+  background-color: var(--bg-color);
   padding: 15px;
 }
 
