@@ -12,7 +12,7 @@ This project was not only a portfolio piece but also a major milestone in my cod
 
 ## 🔧 Tech Stack
 
-- **HTML5 / CSS3 **
+- **HTML5 / CSS3**
 - **Bootstrap 5**
 - **JavaScript / jQuery**
 - **Responsive Design**
