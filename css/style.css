@@ -197,16 +197,47 @@ img {
       width: 100%;
     }
   }
-  
+
+/*---------------------------------------
+    BUTTONS
+----------------------------------------*/
+.button {
+  font-size: 22px;
+  font-weight: 600;
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  padding: 12px 35px;
+  border-radius: 8px;
+  background: #f6781e;
+  color: #fff;
+  box-shadow: 0 0 0 3px #2f2e41, 0 6px 0 #2f2e41;
+  transition: all 0.1s ease, background 0.3s ease;
+}
+
+.button:hover,
+.button:focus {
+  background: #df6108;
+}
+
+.button:active {
+  box-shadow: 0 0 0 3px #2f2e41, 0 4px 0 #2f2e41;
+  transform: translateY(2px);
+}
+
+/*---------------------------------------*/
+
 /*---------------------------------------
    ABOUT US
 ----------------------------------------*/
-/* General Container Styling */
 .container-fluid {
   padding: 0 15px;
 }
 
-/* Team Area Styling */
 .about-title {
   margin-bottom: 40px;
 }
@@ -235,99 +266,50 @@ img {
   line-height: 1.6;
 }
 
-/* Card Styling */
-.card1 {
-  margin: 20px;
-  border: 2px solid #FF9F66; 
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+.card {
+  background-color: #1c1c1c;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: #FFF8E1; 
+  overflow: hidden;
+  text-align: center;
+  margin: 20px;
 }
 
-.card1:hover {
-  transform: translateY(-5px); 
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); 
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
 }
 
 .card-img-top {
-  width: 100%;
-  height: auto;
-}
-
-.card-body {
-  text-align: center;
-  padding: 20px;
+  height: 300px;
+  object-fit: cover;
+  filter: sepia(0.2) contrast(1.1);
 }
 
 .card-title {
-  font-size: 1.5rem; 
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #FF5F00; 
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.3rem;
+  color: #f4f4f4;
+  margin-top: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-.card-body a {
-  color: #007bff;
-  text-decoration: none;
-  font-size: 1.5rem;
+.card-body {
+  background-color: #2c2c2c;
+  padding: 15px;
 }
 
-.card-body a:hover {
-  color: #0056b3;
+/* Responsive layout */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
 }
 
-/* Animation */
-@keyframes cardFadeIn {
-  from {
-      opacity: 0;
-      transform: translateY(20px);
-  }
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
-
-.card1 {
-  animation: cardFadeIn 0.6s ease-in-out;
-}
-
-/* Media Queries for Responsiveness */
-@media (min-width: 768px) {
-  .card1 {
-      width: 300px;
-  }
-}
-
-@media (max-width: 768px) {
-  .card1 {
-      margin: 10px auto;
-  }
-}
-
-
-/* About team */  
-  
-  @media (min-width: 576px) {
-    .card {
-      max-width: calc(100% / 2 - 30px); /* Two cards per row on small screens */
-    }
-  }
-  
-  @media (min-width: 768px) {
-    .card {
-      max-width: calc(100% / 3 - 30px); /* Three cards per row on medium screens */
-    }
-  }
-  
-  @media (min-width: 992px) {
-    .card {
-      max-width: calc(100% / 4 - 30px); /* Four cards per row on large screens */
-    }
-  }
-  
 /*---------------------------------------
   PRODUCT
 ----------------------------------------*/
