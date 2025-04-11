@@ -20,11 +20,11 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-size: 16px;
-    line-height: 1.5;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    /* line-height: 1.5; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* justify-content: center; */
     min-height: 100vh;
     background-image:url(https://mardoqueiro.github.io/all_images/E-com_/retro/rotatedBackground.jpg);
 }
@@ -47,6 +47,7 @@ img {
     margin: 0 auto;
     padding: 0 20px;
 }
+
 
 /*---------------------------------------
     HEADER
@@ -85,11 +86,11 @@ nav a:hover {
     width: 5rem;
 }
 
-.navbar{
+.navbar {
     backdrop-filter: blur(30px);
     box-shadow: 0px 0px 30px rgba(227,228,237,0.37);
     border: 2px solid rgba(255,255,255,0.18);
-}
+} 
 
 img {
     aspect-ratio: 1;
