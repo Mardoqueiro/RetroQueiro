@@ -143,19 +143,19 @@
           >
             <div class="single-contact-form">
               <div class="contact-box name">
-                <input type="text" name="name" placeholder="first name" />
-                <input type="text" name="name" placeholder="last name" />
+                <input type="text" name="first_name" placeholder="first name" />
+                <input type="text" name="last_name" placeholder="last name" />
               </div>
             </div>
             <div class="single-contact-form">
               <div class="contact-box subject">
-                <input type="email" name="email" placeholder="email" />
-                <input type="text" name="subject" placeholder="Subject*" />
+                <input type="email" name="email" placeholder="email*" required />
+                <input type="text" name="subject" placeholder="Subject*" required />
               </div>
             </div>
             <div class="single-contact">
               <div class="contact-box message">
-                <textarea name="message" placeholder="Message*"></textarea>
+                <textarea name="message" placeholder="Message*" required></textarea>
               </div>
             </div>
             <div class="retro-btn">
@@ -229,18 +229,6 @@
       crossorigin="anonymous"
     ></script>
     <!-- Custom's script -->
-    <script>
-      // Current year
-      document.querySelector("[currentYear]").textContent =
-        new Date().getUTCFullYear();
-      // Counter
-      window.onload = () => {
-        document.querySelector("[counter]").textContent = JSON.parse(
-          localStorage.getItem("checkout")
-        )
-          ? JSON.parse(localStorage.getItem("checkout")).length
-          : 0;
-      };
-    </script>
+    <script src="../script/store.js"></script>
   </body>
 </html>

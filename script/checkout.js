@@ -1,7 +1,4 @@
-document.querySelector("[currentYear]").textContent =
-  new Date().getUTCFullYear();
-
-let checkoutItems = JSON.parse(localStorage.getItem("checkout")) || [];
+let checkoutItems = getCart();
 
 function displayCheckoutItems() {
   const checkoutTableBody = document.getElementById("checkoutTableBody");
@@ -10,7 +7,7 @@ function displayCheckoutItems() {
 
   checkoutItems.forEach((item, index) => {
     const row = document.createElement("tr");
-    const itemTotalPrice = item.price * (item.quantity || 1); 
+    const itemTotalPrice = item.amount * (item.quantity || 1);
     row.innerHTML = `
             <td>${item.productName}</td>
             <td>${item.category}</td>
@@ -22,7 +19,7 @@ function displayCheckoutItems() {
                 <input type="number" min="1" value="${
                   item.quantity || 1
                 }" onchange="updateQuantity(${index}, this.value)">
-            </td> 
+            </td>
             <td>R${itemTotalPrice.toFixed(2)}</td>
             <td><button class="btn remove-btn btn-danger" onclick="removeItem(${index})">Remove</button></td>
         `;
@@ -38,66 +35,35 @@ function displayCheckoutItems() {
   checkoutTableBody.appendChild(totalRow);
 }
 
-function addItemToCart(product) {
-  const existingItemIndex = checkoutItems.findIndex(
-    (item) => item.productName === product.productName
-  );
-  if (existingItemIndex !== -1) {
-    checkoutItems[existingItemIndex].quantity += 1;
-  } else {
-    checkoutItems.push({ ...product, quantity: 1 });
-  }
-  localStorage.setItem("checkout", JSON.stringify(checkoutItems));
+// Save the cart, then refresh the table and the navbar counter
+function saveCheckout() {
+  saveCart(checkoutItems);
   displayCheckoutItems();
 }
 
 function removeItem(index) {
-  const removedQuantity = checkoutItems[index].quantity; 
-  checkoutItems.splice(index, 1); 
-  localStorage.setItem("checkout", JSON.stringify(checkoutItems)); 
-  displayCheckoutItems(); 
-  updateCartCounter(-removedQuantity); 
+  checkoutItems.splice(index, 1);
+  saveCheckout();
 }
 
 function updateQuantity(index, quantity) {
-  checkoutItems[index].quantity = parseInt(quantity); 
-  localStorage.setItem("checkout", JSON.stringify(checkoutItems));
-  displayCheckoutItems(); 
-  updateCartCounter(); 
+  // Don't allow an empty, zero or negative quantity
+  checkoutItems[index].quantity = Math.max(1, parseInt(quantity) || 1);
+  saveCheckout();
 }
-
-displayCheckoutItems();
 
 function payNow() {
   if (checkoutItems.length === 0) {
     alert("Your cart is empty. Please add items to proceed.");
     return;
   }
-  else {
-    alert("Thank you for your Order!");
-  }
+  alert("Thank you for your Order!");
+  clearCart();
 }
 
 function clearCart() {
   checkoutItems = [];
-  localStorage.setItem("checkout", JSON.stringify(checkoutItems));
-  displayCheckoutItems();
+  saveCheckout();
 }
 
-window.onload = () => {
-  updateCartCounter();
-};
-
-function updateCartCounter() {
-  const totalQuantity = checkoutItems.reduce(
-    (total, item) => total + item.quantity,
-    0
-  );
-  document.querySelector("[counter]").textContent = totalQuantity || 0;
-}
-
-let spinnerWrapper = document.querySelector(".spinner-wrapper");
-
-setTimeout(() => {
-  spinnerWrapper.style.opacity = 0;
-}, 200);
+displayCheckoutItems();

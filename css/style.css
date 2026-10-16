@@ -436,7 +436,7 @@ img {
   padding: 10px 25px;
   border-radius: 8px;
   background: #f6781e;
-  color: #fff;
+  color: var(--text-color);
   box-shadow: 0 0 0 3px #2f2e41, 0 6px 0 #2f2e41;
   transition: all 0.1s ease, background 0.3s ease;
 }

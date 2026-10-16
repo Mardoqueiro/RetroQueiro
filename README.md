@@ -20,7 +20,20 @@ This project was not only a portfolio piece but also a major milestone in my cod
 ## 📦 Features
 
 - Clean navigation with a sticky navbar
-- Dynamic product layout
-- Scroll-based logo and navbar effects
-- Cart counter (in progress)
+- Dynamic product layout with search, category filter and price sorting
+- Shopping cart with quantities, totals and a live navbar counter
+- Admin page to add, edit and remove products
+- Cart and products saved in the browser with `localStorage`
 - Mobile responsiveness
+
+## 🗂️ Project Structure
+
+- `index.html` – home page
+- `html/` – About, Products, Cart (checkout), Admin and Contact pages
+- `css/style.css` – all custom styling
+- `script/store.js` – shared product list, cart helpers and navbar counter (loaded on every page)
+- `script/products.js`, `script/checkout.js`, `script/admin.js`, `script/code.js` – page-specific logic
+
+## 🚀 Running Locally
+
+No build step needed — open `index.html` in a browser, or use the VS Code Live Server extension.

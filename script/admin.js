@@ -1,9 +1,7 @@
-document.querySelector('[currentYear]').textContent = new Date().getUTCFullYear();
-
 document.addEventListener("DOMContentLoaded", function() {
     const productTableBody = document.getElementById("productTableBody");
     const searchInput = document.querySelector("[searchProduct]");
-    let products = JSON.parse(localStorage.getItem("products")) || [];
+    let products = getProducts();
 
     function renderProducts(productList) {
         productTableBody.innerHTML = "";
@@ -51,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
         this.productName = productName;
         this.category = category;
         this.description = description;
-        this.image = amount;
+        this.amount = amount;
         this.image = image;
     }
 
@@ -70,19 +68,22 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("productName").value = "";
         document.getElementById("category").value = "";
         document.getElementById("description").value = "";
-        document.getElementById("amount").value = "";
-        document.getElementById("image").value = "";
+        document.getElementById("price").value = "";
+        document.getElementById("imageUrl").value = "";
         document.getElementById("saveProductChangesBtn").dataset.id = "";
     }
 
     // Event listener for modal's "Save Changes" button
     document.getElementById("saveProductChangesBtn").addEventListener("click", function() {
-        const id = this.dataset.id ? parseInt(this.dataset.id) : products.length + 1;
+        // New products get the next id after the highest one, so ids stay unique after removals
+        const id = this.dataset.id
+            ? parseInt(this.dataset.id)
+            : products.reduce((maxId, product) => Math.max(maxId, product.id), 0) + 1;
         const productName = document.getElementById("productName").value;
         const category = document.getElementById("category").value;
         const description = document.getElementById("description").value;
-        const amount = document.getElementById("amount").value;
-        const image = document.getElementById("image").value;
+        const amount = parseFloat(document.getElementById("price").value) || 0;
+        const image = document.getElementById("imageUrl").value;
 
         if (this.dataset.id) {
             // Edit existing product
@@ -94,11 +95,23 @@ document.addEventListener("DOMContentLoaded", function() {
             products.push(newProduct);
         }
 
-        localStorage.setItem("products", JSON.stringify(products));
+        saveProducts(products);
         renderProducts(products);
         clearModal();
         const modal = bootstrap.Modal.getInstance(document.getElementById("addProductModal"));
         modal.hide();
+    });
+
+    // Remove confirmation modal
+    const removeModal = new bootstrap.Modal(document.getElementById("errorModal"));
+    let productIdToRemove = null;
+
+    document.getElementById("confirmRemoveBtn").addEventListener("click", function() {
+        if (productIdToRemove !== null) {
+            removeProduct(productIdToRemove);
+            productIdToRemove = null;
+        }
+        removeModal.hide();
     });
 
     // Event listener for remove buttons
@@ -108,12 +121,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const productName = products.find(product => product.id === productId).productName;
             const modalBody = document.getElementById("errorModalBody");
             modalBody.innerHTML = `<p>Are you sure you want to remove "${productName}"?</p>`;
-            const removeButton = document.querySelector("#errorModal button.btn-secondary:last-child");
-            removeButton.addEventListener("click", function() {
-                removeProduct(productId);
-            });
-            const modal = new bootstrap.Modal(document.getElementById("errorModal"));
-            modal.show();
+            productIdToRemove = productId;
+            removeModal.show();
         } else if (event.target.classList.contains("edit-btn")) {
             const productId = parseInt(event.target.dataset.id);
             editProduct(productId);
@@ -127,8 +136,8 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("productName").value = product.productName;
             document.getElementById("category").value = product.category;
             document.getElementById("description").value = product.description;
-            document.getElementById("amount").value = product.amount;
-            document.getElementById("image").value = product.image;
+            document.getElementById("price").value = product.amount;
+            document.getElementById("imageUrl").value = product.image;
             document.getElementById("saveProductChangesBtn").dataset.id = productId;
             const modal = new bootstrap.Modal(document.getElementById("addProductModal"));
             modal.show();
@@ -140,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const index = products.findIndex(product => product.id === productId);
         if (index !== -1) {
             products.splice(index, 1);
-            localStorage.setItem("products", JSON.stringify(products));
+            saveProducts(products);
             renderProducts(products);
         }
     }
@@ -171,34 +180,3 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
-
-// Update counter on page load
-window.onload = () => {
-  updateCartCounter();
-};
-
-// Function to update the counter badge
-function updateCartCounter() {
-  const totalQuantity = checkoutItems.reduce((total, item) => total + item.quantity, 0);
-  document.querySelector("[counter]").textContent = totalQuantity || 0;
-}
-
-// Initialize checkoutItems and update counter on page load
-let checkoutItems = JSON.parse(localStorage.getItem("checkout")) || [];
-
-window.onload = () => {
-    updateCartCounter();
-};
-
-// Function to update the counter badge
-function updateCartCounter() {
-    const totalQuantity = checkoutItems.reduce((total, item) => total + item.quantity, 0);
-    document.querySelector("[counter]").textContent = totalQuantity || 0;
-}
-
-// Spinner
-let spinnerWrapper = document.querySelector(".spinner-wrapper");
-
-setTimeout(() => {
-  spinnerWrapper.style.opacity = 0;
-}, 200);
