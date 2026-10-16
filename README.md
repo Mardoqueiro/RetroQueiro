@@ -32,7 +32,7 @@ This project was not only a portfolio piece but also a major milestone in my cod
 - `html/` – About, Products, Cart (checkout), Admin and Contact pages
 - `css/style.css` – all custom styling
 - `script/store.js` – shared product list, cart helpers and navbar counter (loaded on every page)
-- `script/products.js`, `script/checkout.js`, `script/admin.js`, `script/code.js` – page-specific logic
+- `script/code.js` (home), `script/products.js`, `script/checkout.js` (cart), `script/admin.js`, `script/contact.js` – page-specific logic
 
 ## 🚀 Running Locally
 

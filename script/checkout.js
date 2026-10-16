@@ -1,69 +1,86 @@
-let checkoutItems = getCart();
+let cartContent = document.querySelector("[cartContent]");
+let cartEmpty = document.querySelector("[cartEmpty]");
+let cartItems = document.querySelector("[cartItems]");
+let orderModal = new bootstrap.Modal(document.getElementById("orderModal"));
 
-function displayCheckoutItems() {
-  const checkoutTableBody = document.getElementById("checkoutTableBody");
-  checkoutTableBody.innerHTML = "";
-  let total = 0;
+let cart = getCart();
 
-  checkoutItems.forEach((item, index) => {
-    const row = document.createElement("tr");
-    const itemTotalPrice = item.amount * (item.quantity || 1);
-    row.innerHTML = `
-            <td>${item.productName}</td>
-            <td>${item.category}</td>
-            <td><img src="${item.image}" alt="${
-      item.productName
-    }" width="100"></td>
-            <td>${item.description}</td>
-            <td>
-                <input type="number" min="1" value="${
-                  item.quantity || 1
-                }" onchange="updateQuantity(${index}, this.value)">
-            </td>
-            <td>R${itemTotalPrice.toFixed(2)}</td>
-            <td><button class="btn remove-btn btn-danger" onclick="removeItem(${index})">Remove</button></td>
-        `;
-    checkoutTableBody.appendChild(row);
-    total += itemTotalPrice;
-  });
+function renderCart() {
+  const count = getCartCount(cart);
+  const subtotal = cart.reduce((sum, item) => sum + item.amount * item.quantity, 0);
 
-  const totalRow = document.createElement("tr");
-  totalRow.classList.add("total-row");
-  totalRow.innerHTML = `
-        <td colspan="7">Total: R ${total.toFixed(2)}</td>
-    `;
-  checkoutTableBody.appendChild(totalRow);
+  cartContent.hidden = cart.length === 0;
+  cartEmpty.hidden = cart.length > 0;
+
+  document.querySelector("[cartItemCount]").textContent = `${count} ${count === 1 ? "item" : "items"}`;
+  document.querySelector("[cartSummaryCount]").textContent = count;
+  document.querySelector("[cartSubtotal]").textContent = formatPrice(subtotal);
+  document.querySelector("[cartTotal]").textContent = formatPrice(subtotal);
+
+  cartItems.innerHTML = cart
+    .map(
+      (item, index) => `
+        <li class="cart-item">
+          <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.productName)}" />
+          <div class="cart-item__info">
+            <h3 class="cart-item__name">${escapeHtml(item.productName)}</h3>
+            <p class="cart-item__meta">${escapeHtml(item.category)} · ${formatPrice(item.amount)} each</p>
+            <div class="qty" role="group" aria-label="Quantity of ${escapeHtml(item.productName)}">
+              <button class="icon-btn" type="button" data-action="decrease" data-index="${index}" aria-label="Decrease quantity" ${item.quantity <= 1 ? "disabled" : ""}>
+                <i class="bi bi-dash-lg" aria-hidden="true"></i>
+              </button>
+              <input class="form-control qty__input" type="number" min="1" max="99" value="${item.quantity}" data-index="${index}" aria-label="Quantity" />
+              <button class="icon-btn" type="button" data-action="increase" data-index="${index}" aria-label="Increase quantity">
+                <i class="bi bi-plus-lg" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          <div class="cart-item__side">
+            <span class="cart-item__total">${formatPrice(item.amount * item.quantity)}</span>
+            <button class="link-remove" type="button" data-action="remove" data-index="${index}">
+              <i class="bi bi-trash3" aria-hidden="true"></i> Remove
+            </button>
+          </div>
+        </li>`
+    )
+    .join("");
 }
 
-// Save the cart, then refresh the table and the navbar counter
-function saveCheckout() {
-  saveCart(checkoutItems);
-  displayCheckoutItems();
+// Save the cart, then refresh the page and the navbar counter
+function saveAndRender() {
+  saveCart(cart);
+  renderCart();
 }
 
-function removeItem(index) {
-  checkoutItems.splice(index, 1);
-  saveCheckout();
-}
+cartItems.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-action]");
+  if (!button) return;
+  const item = cart[Number(button.dataset.index)];
 
-function updateQuantity(index, quantity) {
-  // Don't allow an empty, zero or negative quantity
-  checkoutItems[index].quantity = Math.max(1, parseInt(quantity) || 1);
-  saveCheckout();
-}
+  if (button.dataset.action === "increase") item.quantity = Math.min(99, item.quantity + 1);
+  if (button.dataset.action === "decrease") item.quantity = Math.max(1, item.quantity - 1);
+  if (button.dataset.action === "remove") cart.splice(Number(button.dataset.index), 1);
+  saveAndRender();
+});
 
-function payNow() {
-  if (checkoutItems.length === 0) {
-    alert("Your cart is empty. Please add items to proceed.");
-    return;
-  }
-  alert("Thank you for your Order!");
-  clearCart();
-}
+// Typed quantities are kept between 1 and 99
+cartItems.addEventListener("change", (event) => {
+  if (!event.target.matches(".qty__input")) return;
+  const item = cart[Number(event.target.dataset.index)];
+  item.quantity = Math.min(99, Math.max(1, parseInt(event.target.value) || 1));
+  saveAndRender();
+});
 
-function clearCart() {
-  checkoutItems = [];
-  saveCheckout();
-}
+document.querySelector("[clearCart]").addEventListener("click", () => {
+  cart = [];
+  saveAndRender();
+});
 
-displayCheckoutItems();
+document.querySelector("[checkoutButton]").addEventListener("click", () => {
+  if (cart.length === 0) return;
+  cart = [];
+  saveAndRender();
+  orderModal.show();
+});
+
+renderCart();

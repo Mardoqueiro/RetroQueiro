@@ -1,80 +1,55 @@
-let container = document.querySelector("[ourStore]");
-let searchProduct = document.querySelector("[searchProduct]");
-let sortingByAmount = document.querySelector("[sorting]");
-let categoryFilter = document.querySelector("[categoryFilter]");
+let productGrid = document.querySelector("[ourStore]");
+let searchInput = document.querySelector("[searchProduct]");
+let categorySelect = document.querySelector("[categoryFilter]");
+let sortSelect = document.querySelector("[sortProducts]");
+let resultsCount = document.querySelector("[resultsCount]");
+let emptyState = document.querySelector("[emptyState]");
 
 let products = getProducts();
 
-// Function to display products
-function displayProducts(products) {
-  container.innerHTML = ""; // Clear existing products
-
-  products.forEach((product) => {
-    container.innerHTML += `
-            <div class="col">
-                <div class="card">
-                    <img src="${product.image}" class="card-img-top" alt="${product.productName}">
-                    <div class="card-body">
-                        <h5 class="card-title">${product.productName}</h5>
-                        <p class="card-text">${product.description.substring(0, 100)}...</p>
-                        <p class="card-text">R ${product.amount.toFixed(2)}</p>
-                        <button class="btn btn-primary add-to-cart" data-id="${product.id}">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-        `;
-  });
-}
-
-// Search and category filter work together on the current sort order
-function applyFilters() {
-  const searchText = searchProduct.value.trim().toLowerCase();
-  const selectedCategory = categoryFilter.value;
-  const filteredProducts = products.filter(
-    (product) =>
-      (!selectedCategory || product.category === selectedCategory) &&
-      (product.productName.toLowerCase().includes(searchText) ||
-        product.category.toLowerCase().includes(searchText))
-  );
-
-  if (filteredProducts.length === 0) {
-    container.innerHTML = `<div class="alert alert-warning">No matching products found</div>`;
-  } else {
-    displayProducts(filteredProducts);
-  }
-}
-
-searchProduct.addEventListener("input", applyFilters);
-categoryFilter.addEventListener("change", applyFilters);
-
-// Sorting functionality
-let ascendingOrder = true; // Default sort order
-
-sortingByAmount.addEventListener("click", () => {
-  products.sort((a, b) =>
-    ascendingOrder ? a.amount - b.amount : b.amount - a.amount
-  );
-  applyFilters();
-  sortingByAmount.textContent = ascendingOrder
-    ? "Sorted by lowest amount"
-    : "Sorted by highest amount";
-  ascendingOrder = !ascendingOrder; // Toggle sort order
+// Categories come from the products, so ones added on the admin page show up too
+getCategories(products).forEach((category) => {
+  categorySelect.add(new Option(category, category));
 });
 
-// Add to cart (one listener for every card's button)
-container.addEventListener("click", (event) => {
-  if (!event.target.classList.contains("add-to-cart")) return;
-  const product = addProductToCart(Number(event.target.dataset.id));
-  if (product) {
-    showCartToast(`${product.productName} has been added to your cart!`);
-  }
-});
+const sorters = {
+  featured: () => 0,
+  "price-asc": (a, b) => a.amount - b.amount,
+  "price-desc": (a, b) => b.amount - a.amount,
+  name: (a, b) => a.productName.localeCompare(b.productName),
+};
 
-function showCartToast(message) {
-  document.querySelector("[cartToastMessage]").textContent = message;
-  bootstrap.Toast.getOrCreateInstance(
-    document.querySelector("[cartToast]")
-  ).show();
+// Search, category and sort all apply together
+function renderProducts() {
+  const searchText = searchInput.value.trim().toLowerCase();
+  const selectedCategory = categorySelect.value;
+
+  const visibleProducts = products
+    .filter(
+      (product) =>
+        (!selectedCategory || product.category === selectedCategory) &&
+        (product.productName.toLowerCase().includes(searchText) ||
+          product.category.toLowerCase().includes(searchText))
+    )
+    .sort(sorters[sortSelect.value]);
+
+  productGrid.innerHTML = visibleProducts.map(renderProductCard).join("");
+  resultsCount.textContent = `${visibleProducts.length} ${
+    visibleProducts.length === 1 ? "product" : "products"
+  }`;
+  emptyState.hidden = visibleProducts.length > 0;
 }
 
-displayProducts(products);
+searchInput.addEventListener("input", renderProducts);
+categorySelect.addEventListener("change", renderProducts);
+sortSelect.addEventListener("change", renderProducts);
+
+document.querySelector("[resetFilters]").addEventListener("click", () => {
+  searchInput.value = "";
+  categorySelect.value = "";
+  sortSelect.value = "featured";
+  renderProducts();
+});
+
+bindAddToCart(productGrid);
+renderProducts();

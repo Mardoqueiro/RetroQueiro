@@ -1,182 +1,140 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const productTableBody = document.getElementById("productTableBody");
-    const searchInput = document.querySelector("[searchProduct]");
-    let products = getProducts();
+let productTableBody = document.getElementById("productTableBody");
+let searchInput = document.querySelector("[searchProduct]");
+let sortSelect = document.querySelector("[sortProducts]");
+let productForm = document.getElementById("productForm");
+let productModal = new bootstrap.Modal(document.getElementById("productModal"));
+let removeModal = new bootstrap.Modal(document.getElementById("removeModal"));
 
-    function renderProducts(productList) {
-        productTableBody.innerHTML = "";
-        productList.forEach(product => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${product.id}</td>
-                <td>${product.productName}</td>
-                <td>${product.category}</td>
-                <td>${product.description}</td>
-                <td>R${product.amount}</td>
-                <td><img src="${product.image}" alt="${product.productName}" style="width: 100px; height: auto;"></td>
-                <td><button class="edit-btn btn btn-success" data-id="${product.id}">Edit</button></td>
-                <td><button class="remove-btn btn btn-danger" data-id="${product.id}">Remove</button></td>
-            `;
-            productTableBody.appendChild(row);
-        });
-    }
+let products = getProducts();
+let editingId = null; // null while adding a new product
+let productIdToRemove = null;
 
-    function filterAndSortProducts(query) {
-        const filteredProducts = products.filter(product =>
-            product.productName.toLowerCase().includes(query.toLowerCase()) ||
-            product.category.toLowerCase().includes(query.toLowerCase())
-        );
+const sorters = {
+  default: () => 0,
+  "price-asc": (a, b) => a.amount - b.amount,
+  "price-desc": (a, b) => b.amount - a.amount,
+  name: (a, b) => a.productName.localeCompare(b.productName),
+};
 
-        filteredProducts.sort((a, b) => {
-            const nameA = a.productName.toLowerCase();
-            const nameB = b.productName.toLowerCase();
-            const categoryA = a.category.toLowerCase();
-            const categoryB = b.category.toLowerCase();
+function renderTable() {
+  const query = searchInput.value.trim().toLowerCase();
+  const visibleProducts = products
+    .filter(
+      (product) =>
+        product.productName.toLowerCase().includes(query) ||
+        product.category.toLowerCase().includes(query)
+    )
+    .sort(sorters[sortSelect.value]);
 
-            if (nameA < nameB) return -1;
-            if (nameA > nameB) return 1;
-            if (categoryA < categoryB) return -1;
-            if (categoryA > categoryB) return 1;
-            return 0;
-        });
+  if (visibleProducts.length === 0) {
+    productTableBody.innerHTML = `
+      <tr><td colspan="6" class="admin-table__empty">No products found.</td></tr>`;
+    return;
+  }
 
-        return filteredProducts;
-    }
+  productTableBody.innerHTML = visibleProducts
+    .map(
+      (product) => `
+        <tr>
+          <td><img src="${escapeHtml(product.image)}" alt="" /></td>
+          <td class="admin-table__name">${escapeHtml(product.productName)}</td>
+          <td>${escapeHtml(product.category)}</td>
+          <td class="text-nowrap">${formatPrice(product.amount)}</td>
+          <td><p class="admin-table__desc">${escapeHtml(product.description)}</p></td>
+          <td>
+            <div class="admin-actions">
+              <button class="btn-retro btn-retro--secondary btn-retro--sm" type="button" data-action="edit" data-id="${product.id}">
+                <i class="bi bi-pencil" aria-hidden="true"></i> Edit
+              </button>
+              <button class="btn-retro btn-retro--danger btn-retro--sm" type="button" data-action="remove" data-id="${product.id}">
+                <i class="bi bi-trash3" aria-hidden="true"></i> Remove
+              </button>
+            </div>
+          </td>
+        </tr>`
+    )
+    .join("");
+}
 
-    // Constructor function for products
-    function Product(id, productName, category, description, amount, image) {
-        this.id = id;
-        this.productName = productName;
-        this.category = category;
-        this.description = description;
-        this.amount = amount;
-        this.image = image;
-    }
+// Suggest existing categories while typing in the form
+function refreshCategoryOptions() {
+  document.getElementById("categoryOptions").innerHTML = getCategories(products)
+    .map((category) => `<option value="${escapeHtml(category)}"></option>`)
+    .join("");
+}
 
-    renderProducts(products);
+function openProductForm(product) {
+  editingId = product ? product.id : null;
+  productForm.reset();
+  productForm.classList.remove("was-validated");
+  document.getElementById("productModalLabel").textContent = product ? "Edit product" : "Add product";
 
-    // Add new product button functionality
-    const addNewProductBtn = document.getElementById("addNewProductBtn");
-    addNewProductBtn.addEventListener("click", function() {
-        clearModal();
-        const modal = new bootstrap.Modal(document.getElementById("addProductModal"));
-        modal.show();
-    });
+  if (product) {
+    productForm.productName.value = product.productName;
+    productForm.category.value = product.category;
+    productForm.price.value = product.amount;
+    productForm.imageUrl.value = product.image;
+    productForm.description.value = product.description;
+  }
+  productModal.show();
+}
 
-    // Clear modal fields
-    function clearModal() {
-        document.getElementById("productName").value = "";
-        document.getElementById("category").value = "";
-        document.getElementById("description").value = "";
-        document.getElementById("price").value = "";
-        document.getElementById("imageUrl").value = "";
-        document.getElementById("saveProductChangesBtn").dataset.id = "";
-    }
+productForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (!productForm.checkValidity()) {
+    productForm.classList.add("was-validated");
+    productForm.querySelector(":invalid").focus();
+    return;
+  }
 
-    // Event listener for modal's "Save Changes" button
-    document.getElementById("saveProductChangesBtn").addEventListener("click", function() {
-        // New products get the next id after the highest one, so ids stay unique after removals
-        const id = this.dataset.id
-            ? parseInt(this.dataset.id)
-            : products.reduce((maxId, product) => Math.max(maxId, product.id), 0) + 1;
-        const productName = document.getElementById("productName").value;
-        const category = document.getElementById("category").value;
-        const description = document.getElementById("description").value;
-        const amount = parseFloat(document.getElementById("price").value) || 0;
-        const image = document.getElementById("imageUrl").value;
+  const product = {
+    // New products get the next id after the highest one, so ids stay unique after removals
+    id: editingId ?? products.reduce((maxId, product) => Math.max(maxId, product.id), 0) + 1,
+    productName: productForm.productName.value.trim(),
+    category: productForm.category.value.trim(),
+    description: productForm.description.value.trim(),
+    amount: parseFloat(productForm.price.value),
+    image: productForm.imageUrl.value.trim(),
+  };
 
-        if (this.dataset.id) {
-            // Edit existing product
-            const index = products.findIndex(product => product.id === id);
-            products[index] = new Product(id, productName, category, description, amount, image);
-        } else {
-            // Add new product
-            const newProduct = new Product(id, productName, category, description, amount, image);
-            products.push(newProduct);
-        }
+  if (editingId === null) {
+    products.push(product);
+  } else {
+    products[products.findIndex((item) => item.id === editingId)] = product;
+  }
 
-        saveProducts(products);
-        renderProducts(products);
-        clearModal();
-        const modal = bootstrap.Modal.getInstance(document.getElementById("addProductModal"));
-        modal.hide();
-    });
-
-    // Remove confirmation modal
-    const removeModal = new bootstrap.Modal(document.getElementById("errorModal"));
-    let productIdToRemove = null;
-
-    document.getElementById("confirmRemoveBtn").addEventListener("click", function() {
-        if (productIdToRemove !== null) {
-            removeProduct(productIdToRemove);
-            productIdToRemove = null;
-        }
-        removeModal.hide();
-    });
-
-    // Event listener for remove buttons
-    productTableBody.addEventListener("click", function(event) {
-        if (event.target.classList.contains("remove-btn")) {
-            const productId = parseInt(event.target.dataset.id);
-            const productName = products.find(product => product.id === productId).productName;
-            const modalBody = document.getElementById("errorModalBody");
-            modalBody.innerHTML = `<p>Are you sure you want to remove "${productName}"?</p>`;
-            productIdToRemove = productId;
-            removeModal.show();
-        } else if (event.target.classList.contains("edit-btn")) {
-            const productId = parseInt(event.target.dataset.id);
-            editProduct(productId);
-        }
-    });
-
-    // Edit product functionality
-    function editProduct(productId) {
-        const product = products.find(product => product.id === productId);
-        if (product) {
-            document.getElementById("productName").value = product.productName;
-            document.getElementById("category").value = product.category;
-            document.getElementById("description").value = product.description;
-            document.getElementById("price").value = product.amount;
-            document.getElementById("imageUrl").value = product.image;
-            document.getElementById("saveProductChangesBtn").dataset.id = productId;
-            const modal = new bootstrap.Modal(document.getElementById("addProductModal"));
-            modal.show();
-        }
-    }
-
-    // Remove product functionality
-    function removeProduct(productId) {
-        const index = products.findIndex(product => product.id === productId);
-        if (index !== -1) {
-            products.splice(index, 1);
-            saveProducts(products);
-            renderProducts(products);
-        }
-    }
-
-    // Sorting functionality
-    let ascendingOrder = true; // Default sort order
-    const sortButton = document.querySelector("[sorting]");
-
-    sortButton.addEventListener("click", () => {
-        try {
-            products.sort((a, b) => ascendingOrder ? a.amount - b.amount : b.amount - a.amount);
-            renderProducts(products);
-            ascendingOrder = !ascendingOrder; // Toggle sort order
-            sortButton.textContent = ascendingOrder ? "Sort by highest amount" : "Sort by lowest amount";
-        } catch (error) {
-            document.body.innerHTML += `<div class="alert alert-danger">Sorting failed. Please try again.</div>`;
-        }
-    });
-
-    // Search functionality
-    searchInput.addEventListener("input", function() {
-        const query = this.value.trim();
-        if (query === "") {
-            renderProducts(products);
-        } else {
-            const filteredProducts = filterAndSortProducts(query);
-            renderProducts(filteredProducts);
-        }
-    });
+  saveProducts(products);
+  renderTable();
+  refreshCategoryOptions();
+  productModal.hide();
+  showToast(editingId === null ? "Product added." : "Product updated.");
 });
+
+productTableBody.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-action]");
+  if (!button) return;
+  const product = products.find((product) => product.id === Number(button.dataset.id));
+
+  if (button.dataset.action === "edit") openProductForm(product);
+  if (button.dataset.action === "remove") {
+    productIdToRemove = product.id;
+    document.querySelector("[removeProductName]").textContent = product.productName;
+    removeModal.show();
+  }
+});
+
+document.getElementById("confirmRemoveBtn").addEventListener("click", () => {
+  products = products.filter((product) => product.id !== productIdToRemove);
+  saveProducts(products);
+  renderTable();
+  refreshCategoryOptions();
+  removeModal.hide();
+  showToast("Product removed.");
+});
+
+document.getElementById("addNewProductBtn").addEventListener("click", () => openProductForm(null));
+searchInput.addEventListener("input", renderTable);
+sortSelect.addEventListener("change", renderTable);
+
+renderTable();
+refreshCategoryOptions();

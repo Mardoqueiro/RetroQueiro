@@ -75,6 +75,10 @@ function saveProducts(products) {
   localStorage.setItem("products", JSON.stringify(products));
 }
 
+function getCategories(products = getProducts()) {
+  return [...new Set(products.map((product) => product.category))].sort();
+}
+
 // Cart
 function getCart() {
   return JSON.parse(localStorage.getItem("checkout")) || [];
@@ -100,23 +104,87 @@ function addProductToCart(productId) {
   return product;
 }
 
+function getCartCount(cart = getCart()) {
+  return cart.reduce((total, item) => total + item.quantity, 0);
+}
+
 // Navbar cart badge shows the total quantity in the cart
 function updateCartCounter() {
-  document.querySelector("[counter]").textContent = getCart().reduce(
-    (total, item) => total + item.quantity,
-    0
+  const count = getCartCount();
+  document.querySelectorAll("[counter]").forEach((counter) => {
+    counter.textContent = count;
+  });
+}
+
+// Formatting
+function formatPrice(amount) {
+  return (
+    "R " +
+    Number(amount).toLocaleString("en-US", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })
   );
+}
+
+// Product text can be typed in on the admin page, so escape it before
+// putting it into HTML
+function escapeHtml(value) {
+  const entities = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+  return String(value ?? "").replace(/[&<>"']/g, (char) => entities[char]);
+}
+
+// Product card used on the home and products pages
+function renderProductCard(product) {
+  return `
+    <article class="product-card">
+      <div class="product-card__media">
+        <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.productName)}" loading="lazy" />
+        <span class="price-burst">${formatPrice(product.amount)}</span>
+      </div>
+      <div class="product-card__body">
+        <p class="product-card__category">${escapeHtml(product.category)}</p>
+        <h3 class="product-card__title">${escapeHtml(product.productName)}</h3>
+        <p class="product-card__text">${escapeHtml(product.description)}</p>
+        <button class="btn-retro btn-retro--block" type="button" data-add-to-cart="${product.id}">
+          <i class="bi bi-bag-plus" aria-hidden="true"></i> Add to cart
+        </button>
+      </div>
+    </article>`;
+}
+
+// Any [data-add-to-cart] button inside root adds that product to the cart
+function bindAddToCart(root) {
+  root.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-add-to-cart]");
+    if (!button) return;
+    const product = addProductToCart(Number(button.dataset.addToCart));
+    if (product) showToast(`${product.productName} was added to your cart.`);
+  });
+}
+
+// Small confirmation message in the corner, created the first time it's needed
+function showToast(message) {
+  let toast = document.querySelector("[siteToast]");
+  if (!toast) {
+    const container = document.createElement("div");
+    container.className = "toast-container position-fixed bottom-0 end-0 p-3";
+    container.innerHTML = `
+      <div class="toast site-toast" role="status" aria-live="polite" aria-atomic="true" siteToast>
+        <div class="d-flex align-items-center">
+          <i class="bi bi-check-circle-fill site-toast__icon" aria-hidden="true"></i>
+          <div class="toast-body" siteToastMessage></div>
+          <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>`;
+    document.body.appendChild(container);
+    toast = container.querySelector("[siteToast]");
+  }
+  toast.querySelector("[siteToastMessage]").textContent = message;
+  bootstrap.Toast.getOrCreateInstance(toast, { delay: 2500 }).show();
 }
 
 // Runs on every page
 document.querySelector("[currentYear]").textContent =
   new Date().getUTCFullYear();
 updateCartCounter();
-
-// Fade out the loading spinner on pages that have one
-const spinnerWrapper = document.querySelector(".spinner-wrapper");
-if (spinnerWrapper) {
-  setTimeout(() => {
-    spinnerWrapper.style.opacity = 0;
-  }, 200);
-}
