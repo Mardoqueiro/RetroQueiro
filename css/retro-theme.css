@@ -1,0 +1,820 @@
+/*=======================================
+   RETRO CARTOON THEME
+   Loaded after style.css on every page. Borrows from the cartoon eras
+   the mascots come from:
+   - 1920s–30s rubber hose: thick ink outlines, bouncy squash & stretch,
+     iris-in openings
+   - 1940s golden age: bullseye title-card rings
+   - 1950s–60s mid-century: starbursts, sparkles, scalloped awnings,
+     Ben-Day dots and a flat, limited palette
+   Remove its <link> to turn it off.
+=======================================*/
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&family=Poppins:wght@400;500;600&family=Satisfy&display=swap');
+
+:root {
+  /* Limited palette pulled from the mascots (cream, orange and navy are the brand) */
+  --bg-color: #FFF4DC;
+  --main-color: #FF9F66;
+  --text-color: #002379;
+  --accent-color: #FF5F00;
+  --mustard: #F7B538;
+  --mustard-light: #FFD98A;
+  --tomato: #E4513C;
+  --teal: #3FA58F;
+  --ink: #231F20;
+  --paper: #FFFAE6;
+
+  --font-display: 'Titan One', 'Arial Rounded MT Bold', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+
+  /* Cel look: inked outline plus a flat, offset shadow */
+  --outline: 3px solid var(--ink);
+  --cel-shadow: 5px 5px 0 var(--ink);
+  --radius: 18px;
+  --bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --starburst: polygon(50.0% 0.0%, 58.5% 13.0%, 71.7% 5.0%, 73.7% 20.3%, 89.1% 18.8%, 84.2% 33.5%, 98.7% 38.9%, 88.0% 50.0%, 98.7% 61.1%, 84.2% 66.5%, 89.1% 81.2%, 73.7% 79.7%, 71.7% 95.0%, 58.5% 87.0%, 50.0% 100.0%, 41.5% 87.0%, 28.3% 95.0%, 26.3% 79.7%, 10.9% 81.2%, 15.8% 66.5%, 1.3% 61.1%, 12.0% 50.0%, 1.3% 38.9%, 15.8% 33.5%, 10.9% 18.8%, 26.3% 20.3%, 28.3% 5.0%, 41.5% 13.0%);
+  --sparkle: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  --ben-day: radial-gradient(circle at center, rgba(35, 31, 32, 0.18) 1.6px, transparent 2px);
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--mustard);
+  color: var(--ink);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--tomato);
+  outline-offset: 3px;
+}
+
+/* Every page opens like an old cartoon: an iris widening from black */
+main {
+  animation: iris-in 0.9s ease-out;
+}
+
+/*---------------------------------------
+   NAVBAR
+----------------------------------------*/
+.navbar {
+  background-color: rgba(255, 250, 230, 0.94);
+  border: none;
+  border-bottom: var(--outline);
+  box-shadow: none;
+}
+
+.link-113,
+.navbar .nav-link {
+  font-family: var(--font-display);
+  font-size: 19px;
+  letter-spacing: 0.5px;
+  color: var(--text-color);
+  border: 3px solid transparent;
+  border-radius: 999px;
+  padding: 6px 16px !important;
+}
+
+.link-113::before,
+.link-113::after {
+  display: none;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+  color: var(--tomato);
+  text-decoration: none;
+  animation: wiggle 0.4s ease-in-out;
+}
+
+/* Current page: a sticker */
+.navbar .nav-link.active,
+.navbar .nav-link.active:hover {
+  background: var(--mustard);
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.navbar-toggler {
+  border: var(--outline);
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.navbar .badge {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 400;
+  background-color: var(--tomato) !important;
+  color: var(--paper);
+  border: 2px solid var(--ink);
+  vertical-align: middle;
+}
+
+/*---------------------------------------
+   HOME HERO – title card
+----------------------------------------*/
+.intro {
+  font-family: 'Satisfy', cursive;
+  color: var(--tomato);
+  font-size: 38px;
+  text-shadow: 2px 2px 0 var(--ink);
+}
+
+.vintage__container {
+  display: block;
+  max-width: 100%;
+}
+
+.vintage {
+  font-family: var(--font-display);
+  font-size: clamp(46px, 7.4vw, 100px);
+  letter-spacing: 1px;
+  line-height: 1.08;
+  color: var(--mustard);
+  -webkit-text-stroke: 3px var(--ink);
+}
+
+.vintage__bot {
+  text-shadow:
+    4px 4px 0 var(--tomato),
+    8px 8px 0 var(--ink);
+}
+
+/* The overlay copy has no fill, so it only takes up space */
+.vintage__top {
+  display: none;
+}
+
+/* Intro paragraph as a speech bubble pointing at the mascot */
+.index-content > p {
+  position: relative;
+  background: var(--paper);
+  border: var(--outline);
+  border-radius: 24px;
+  box-shadow: var(--cel-shadow);
+  padding: 18px 22px;
+  margin-bottom: 30px;
+}
+
+.index-content > p::before,
+.index-content > p::after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+}
+
+.index-content > p::before {
+  right: -22px;
+  top: 40%;
+  border-width: 12px 0 12px 22px;
+  border-color: transparent transparent transparent var(--ink);
+}
+
+.index-content > p::after {
+  right: -15px;
+  top: calc(40% + 4px);
+  border-width: 8px 0 8px 16px;
+  border-color: transparent transparent transparent var(--paper);
+}
+
+/* Bullseye rings behind each mascot */
+.index-animation {
+  position: relative;
+  isolation: isolate;
+}
+
+.index-animation::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(78%, 440px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: var(--outline);
+  background: repeating-radial-gradient(circle at center, var(--mustard) 0 22px, var(--mustard-light) 22px 44px);
+  box-shadow: var(--cel-shadow);
+}
+
+/* Rubber hose bounce: mascots bob in time like a 1930s loop */
+.index-img,
+.video-img {
+  transform-origin: bottom center;
+  animation: rubber-bounce 1.8s ease-in-out infinite;
+}
+
+/* Best-seller panel with a ribbon banner */
+.video-container {
+  position: relative;
+  margin-top: 26px;
+  border: var(--outline);
+  border-radius: var(--radius);
+  box-shadow: 7px 7px 0 var(--ink);
+  background-color: var(--main-color);
+  background-image: var(--ben-day);
+  background-size: 9px 9px;
+  padding: 40px 24px 26px;
+}
+
+.video-container::before {
+  content: "★ Best Seller ★";
+  position: absolute;
+  top: -22px;
+  left: 24px;
+  padding: 6px 18px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--paper);
+  background: var(--tomato);
+  border: var(--outline);
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 var(--ink);
+  transform: rotate(-3deg);
+}
+
+.video-details h4 {
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.video-details p {
+  color: var(--ink);
+}
+
+/*---------------------------------------
+   BUTTONS – squash & stretch
+----------------------------------------*/
+.button,
+.ctr-btn,
+#contact-form button {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  text-transform: none;
+  color: var(--ink);
+  background: var(--mustard);
+  border: var(--outline);
+  border-radius: 999px;
+  padding: 10px 30px;
+  box-shadow: var(--cel-shadow);
+}
+
+.button:hover,
+.button:focus,
+.ctr-btn:hover,
+.ctr-btn:focus,
+#contact-form button:hover {
+  background: var(--tomato);
+  color: var(--paper);
+  text-decoration: none;
+  animation: rubber-squash 0.5s var(--bounce);
+}
+
+.button:active,
+.ctr-btn:active,
+#contact-form button:active {
+  transform: translate(4px, 4px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.ctr-btn {
+  margin: 14px 0 30px;
+}
+
+/* Bootstrap buttons */
+.btn {
+  font-family: var(--font-display);
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  border: var(--outline);
+  border-radius: 999px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.btn:hover {
+  animation: rubber-squash 0.5s var(--bounce);
+}
+
+.btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: var(--paper);
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.btn-secondary:hover {
+  background-color: var(--mustard);
+}
+
+.btn-primary,
+[ourStore] .btn-primary {
+  background-color: var(--tomato);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.btn-primary:hover,
+[ourStore] .btn-primary:hover {
+  background-color: var(--accent-color);
+  border-color: var(--ink);
+}
+
+.btn-success {
+  background-color: var(--teal);
+  border-color: var(--ink);
+}
+
+.btn-danger {
+  background-color: var(--tomato);
+  border-color: var(--ink);
+}
+
+/*---------------------------------------
+   PAGE HEADINGS
+----------------------------------------*/
+.about-content {
+  padding-top: 24px;
+}
+
+.about-title,
+.choose-title,
+.contact-title h2,
+h2.contact-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(30px, 4.6vw, 52px);
+  line-height: 1.15;
+  color: var(--tomato);
+  text-shadow: 3px 3px 0 var(--ink);
+}
+
+/* Twinkling sparkles either side of the page title */
+h1.about-title::before,
+h1.about-title::after {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  margin: 0 0.35em;
+  vertical-align: 0.15em;
+  background: var(--mustard);
+  clip-path: var(--sparkle);
+  animation: twinkle 1.6s ease-in-out infinite;
+}
+
+h1.about-title::after {
+  animation-delay: 0.8s;
+}
+
+/* Wobbly ink underline */
+.about-line::after {
+  width: 144px;
+  height: 12px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cpath d='M0 6 Q6 0 12 6 T24 6' fill='none' stroke='%23E4513C' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x;
+}
+
+.about-breadcrumb {
+  display: inline-block;
+  font-size: 15px;
+  background: var(--paper);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--ink);
+  padding: 3px 16px;
+  margin: 10px 0 22px;
+}
+
+.about-breadcrumb a {
+  color: var(--tomato);
+  font-weight: 600;
+}
+
+.choose-details h4 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--text-color);
+}
+
+/* Feature icons as round badges */
+.choose-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  font-size: 22px;
+  color: var(--ink);
+  background: var(--mustard);
+  border: var(--outline);
+  border-radius: 50%;
+  box-shadow: 3px 3px 0 var(--ink);
+  margin-bottom: 8px;
+}
+
+/*---------------------------------------
+   CARDS (products and team)
+----------------------------------------*/
+.card,
+[ourStore] .card {
+  position: relative;
+  overflow: visible;
+  border: var(--outline);
+  border-radius: var(--radius);
+  box-shadow: 6px 6px 0 var(--ink);
+  background-color: var(--paper);
+  transition: transform 0.35s var(--bounce), box-shadow 0.35s var(--bounce);
+}
+
+.card:hover,
+[ourStore] .card:hover {
+  transform: translateY(-6px) rotate(-1.5deg);
+  box-shadow: 10px 10px 0 var(--ink);
+}
+
+.card-img-top,
+[ourStore] .card-img-top {
+  border-radius: 15px 15px 0 0;
+  border-bottom: var(--outline);
+}
+
+.card-body,
+[ourStore] .card-body {
+  background-color: var(--paper);
+  border-radius: 0 0 15px 15px;
+}
+
+.card-title,
+[ourStore] .card-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0.3px;
+  text-transform: none;
+}
+
+[ourStore] .card-text {
+  color: #4a4545;
+}
+
+/* The price moved onto the photo, so the body only needs to fill the card */
+[ourStore] .card-body {
+  height: auto;
+  flex: 1 1 auto;
+}
+
+[ourStore] .btn-primary {
+  margin-top: auto;
+}
+
+/* Price as a mid-century starburst stuck on the photo */
+[ourStore] .card-text:last-of-type {
+  position: absolute;
+  top: -16px;
+  right: -16px;
+  width: 122px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 0 26px;
+  margin: 0;
+  isolation: isolate;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.05;
+  text-align: center;
+  color: var(--ink);
+  transform: rotate(-10deg);
+}
+
+[ourStore] .card-text:last-of-type::before,
+[ourStore] .card-text:last-of-type::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: var(--starburst);
+}
+
+[ourStore] .card-text:last-of-type::before {
+  z-index: -1;
+  background: var(--mustard);
+  inset: 4px;
+}
+
+[ourStore] .card-text:last-of-type::after {
+  z-index: -2;
+  background: var(--ink);
+  transform: translate(3px, 3px);
+}
+
+/*---------------------------------------
+   FORMS
+----------------------------------------*/
+.form-control,
+.form-select,
+#contact-form input,
+#contact-form textarea {
+  font-family: var(--font-body);
+  border: var(--outline);
+  border-radius: 14px;
+  background-color: var(--paper);
+  color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--ink);
+  background-color: #fff;
+  box-shadow: 3px 3px 0 var(--ink), 0 0 0 5px var(--mustard-light);
+}
+
+.contact-form-warp {
+  border: var(--outline);
+  border-radius: 28px;
+  box-shadow: 8px 8px 0 var(--ink);
+  background-color: var(--paper);
+  background-image: var(--ben-day);
+  background-size: 10px 10px;
+}
+
+.single-contact-address .contact-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  font-size: 18px;
+  color: var(--ink);
+  background: var(--mustard);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  margin-bottom: 4px;
+}
+
+/*---------------------------------------
+   TABLES (cart and admin)
+----------------------------------------*/
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--paper);
+  border: var(--outline);
+  border-radius: var(--radius);
+  box-shadow: 7px 7px 0 var(--ink);
+  overflow: hidden;
+}
+
+thead th {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  background-color: var(--ink);
+  color: var(--paper);
+  border: none;
+}
+
+tbody td {
+  border: none;
+  border-bottom: 2px solid var(--ink);
+}
+
+tbody td + td {
+  border-left: 2px solid var(--ink);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #FFF0CC;
+}
+
+tbody tr:hover {
+  background-color: var(--mustard-light);
+}
+
+.total-row td {
+  font-family: var(--font-display);
+  font-size: 22px;
+  text-align: right;
+  background: var(--mustard);
+}
+
+/*---------------------------------------
+   MODALS AND TOASTS
+----------------------------------------*/
+.modal-content {
+  overflow: hidden;
+  border: var(--outline);
+  border-radius: 22px;
+  box-shadow: 8px 8px 0 var(--ink);
+  background-color: var(--paper);
+}
+
+.modal-header {
+  background: var(--tomato);
+  color: var(--paper);
+  border-bottom: var(--outline);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+}
+
+.modal-header .btn-close {
+  filter: invert(1);
+}
+
+.toast {
+  font-family: var(--font-display);
+  font-size: 17px;
+  border: var(--outline) !important;
+  border-radius: 999px;
+  box-shadow: var(--cel-shadow);
+  background-color: var(--teal) !important;
+  animation: rubber-squash 0.5s var(--bounce);
+}
+
+/*---------------------------------------
+   FOOTER – scalloped awning
+----------------------------------------*/
+.footer {
+  position: relative;
+  margin-top: 36px;
+  border-top: var(--outline);
+  background-color: var(--accent-color);
+  background-image: radial-gradient(circle at center, rgba(35, 31, 32, 0.22) 1.6px, transparent 2px);
+  background-size: 8px 8px;
+  color: var(--paper);
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -18px;
+  height: 18px;
+  background: radial-gradient(circle at 50% 100%, var(--accent-color) 0 13px, var(--ink) 13px 16px, transparent 16px) 0 0 / 32px 18px repeat-x;
+}
+
+.footer-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 22px;
+  color: var(--paper);
+  text-shadow: 2px 2px 0 var(--ink);
+}
+
+.footer a:hover {
+  text-decoration: none;
+}
+
+.footer .social-icons {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  background: var(--paper);
+  color: var(--ink);
+  border: var(--outline);
+  border-radius: 50%;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.footer .social-icons:hover {
+  background: var(--mustard);
+  animation: wiggle 0.4s ease-in-out;
+}
+
+.footer-copyright {
+  font-size: 14px;
+}
+
+/*---------------------------------------
+   ANIMATION
+----------------------------------------*/
+@keyframes iris-in {
+  from { clip-path: circle(0% at 50% 40%); }
+  to   { clip-path: circle(150% at 50% 40%); }
+}
+
+@keyframes rubber-bounce {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg) scale(1.02, 0.98); }
+  50%      { transform: translateY(-14px) rotate(1.5deg) scale(0.98, 1.02); }
+}
+
+@keyframes rubber-squash {
+  0%   { transform: scale(1, 1); }
+  30%  { transform: scale(1.12, 0.88); }
+  50%  { transform: scale(0.94, 1.06); }
+  70%  { transform: scale(1.03, 0.97); }
+  100% { transform: scale(1, 1); }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25%      { transform: rotate(-5deg); }
+  75%      { transform: rotate(5deg); }
+}
+
+@keyframes twinkle {
+  0%, 100% { transform: scale(1) rotate(0); }
+  50%      { transform: scale(0.6) rotate(45deg); }
+}
+
+/*---------------------------------------
+   MOBILE
+----------------------------------------*/
+@media (max-width: 768px) {
+  .index-content {
+    max-width: 100%;
+  }
+
+  .intro {
+    font-size: 30px;
+  }
+
+  .vintage {
+    -webkit-text-stroke-width: 2px;
+  }
+
+  .vintage__bot {
+    text-shadow:
+      3px 3px 0 var(--tomato),
+      6px 6px 0 var(--ink);
+  }
+
+  /* Speech bubble points down at the mascot below */
+  .index-content > p::before {
+    right: auto;
+    top: auto;
+    left: 50%;
+    bottom: -22px;
+    transform: translateX(-50%);
+    border-width: 22px 12px 0 12px;
+    border-color: var(--ink) transparent transparent transparent;
+  }
+
+  .index-content > p::after {
+    right: auto;
+    top: auto;
+    left: 50%;
+    bottom: -15px;
+    transform: translateX(-50%);
+    border-width: 16px 8px 0 8px;
+    border-color: var(--paper) transparent transparent transparent;
+  }
+
+  .video-details h4 {
+    font-size: 21px;
+  }
+
+  [ourStore] .card-text:last-of-type {
+    right: -8px;
+  }
+}
+
+/* Keep everything still for people who prefer less motion */
+@media (prefers-reduced-motion: reduce) {
+  main,
+  .index-img,
+  .video-img,
+  h1.about-title::before,
+  h1.about-title::after,
+  .toast,
+  .btn:hover,
+  .button:hover,
+  .ctr-btn:hover,
+  .navbar .nav-link:hover,
+  .footer .social-icons:hover {
+    animation: none !important;
+  }
+
+  .card {
+    transition: none;
+  }
+}
