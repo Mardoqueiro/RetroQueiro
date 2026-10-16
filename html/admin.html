@@ -27,7 +27,7 @@
     <!-- Custom styling -->
     <link rel="stylesheet" href="../css/style.css" />
   </head>
-  <body class="d-flex flex-column min-vh-100">
+  <body class="d-flex flex-column min-vh-100" data-requires="admin">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <nav class="navbar navbar-expand-lg sticky-top site-nav" aria-label="Main">
@@ -68,6 +68,11 @@
                 <i class="bi bi-bag" aria-hidden="true"></i> Cart
                 <span class="cart-count" counter>0</span>
                 <span class="visually-hidden">items</span>
+              </a>
+            </li>
+            <li class="nav-item" accountNav data-base="./" data-home="../index.html">
+              <a class="nav-link" href="./login.html">
+                <i class="bi bi-person" aria-hidden="true"></i> Log in
               </a>
             </li>
           </ul>
@@ -264,6 +269,7 @@
     ></script>
     <!-- Custom scripts -->
     <script src="../script/store.js"></script>
+    <script src="../script/auth.js"></script>
     <script src="../script/admin.js"></script>
   </body>
 </html>

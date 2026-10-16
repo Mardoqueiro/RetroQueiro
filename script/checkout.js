@@ -76,8 +76,21 @@ document.querySelector("[clearCart]").addEventListener("click", () => {
   saveAndRender();
 });
 
+// Orders need an account, so the order can be saved to it
 document.querySelector("[checkoutButton]").addEventListener("click", () => {
   if (cart.length === 0) return;
+  const user = getCurrentUser();
+  if (!user) {
+    location.href = "./login.html?next=checkout.html";
+    return;
+  }
+
+  addOrder(user.email, {
+    id: Date.now().toString(36).toUpperCase(),
+    date: new Date().toISOString(),
+    items: cart.map(({ id, productName, image, amount, quantity }) => ({ id, productName, image, amount, quantity })),
+    total: cart.reduce((sum, item) => sum + item.amount * item.quantity, 0),
+  });
   cart = [];
   saveAndRender();
   orderModal.show();

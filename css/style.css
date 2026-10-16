@@ -349,7 +349,7 @@ img {
   font-size: clamp(36px, 5.5vw, 60px);
   color: var(--tomato);
   text-shadow: 4px 4px 0 var(--ink);
-  margin: 20px 0 10px;
+  margin: 0 0 10px;
 }
 
 .page-header p {
@@ -357,24 +357,6 @@ img {
   margin: 0 auto;
   font-size: 18px;
   color: var(--muted);
-}
-
-.breadcrumb-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 16px;
-  font-size: 14px;
-  background: var(--paper);
-  border: 2px solid var(--ink);
-  border-radius: 999px;
-  box-shadow: var(--shadow-sm);
-}
-
-.breadcrumb-pill a {
-  font-weight: 600;
-  color: var(--tomato);
-  text-decoration: none;
 }
 
 /*---------------------------------------
@@ -619,19 +601,21 @@ img {
 
 .product-card__media {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1;
+  background: #fff;
   border-bottom: var(--outline);
+  border-radius: 15px 15px 0 0;
 }
 
-/* Positioned so tall photos can't stretch the 4:3 frame */
+/* The whole photo fits, centred, inside the same-size frame */
 .product-card__media img {
   position: absolute;
-  inset: 0;
+  inset: 16px;
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 15px 15px 0 0;
+  width: calc(100% - 32px);
+  height: calc(100% - 32px);
+  object-fit: contain;
+  border-radius: 10px;
 }
 
 .product-card__body {
@@ -755,7 +739,8 @@ img {
 .cart-item img {
   width: 100px;
   height: 100px;
-  object-fit: cover;
+  object-fit: contain;
+  background: #fff;
   border: 2px solid var(--ink);
   border-radius: var(--radius-sm);
 }
@@ -909,7 +894,8 @@ img {
   max-width: none;
   width: 64px;
   height: 64px;
-  object-fit: cover;
+  object-fit: contain;
+  background: #fff;
   border: 2px solid var(--ink);
   border-radius: 10px;
 }
@@ -1011,6 +997,8 @@ img {
   width: 100%;
   aspect-ratio: 1;
   object-fit: cover;
+  /* Keep faces in view */
+  object-position: center top;
   border-bottom: var(--outline);
 }
 
@@ -1279,6 +1267,239 @@ img {
 .footer-bottom p {
   margin: 0;
   opacity: 0.8;
+}
+
+/*---------------------------------------
+   15. ACCOUNTS
+----------------------------------------*/
+/* Pages that need a login stay hidden until the check passes */
+body[data-requires]:not(.auth-ok) main {
+  visibility: hidden;
+}
+
+/* Navbar account menu */
+.site-nav .account-toggle {
+  background: transparent;
+}
+
+.account-menu {
+  min-width: 220px;
+  padding: 8px;
+  background: var(--paper);
+  border: var(--outline);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+
+.account-menu .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  font-weight: 500;
+  color: var(--text-color);
+  border-radius: 8px;
+}
+
+.account-menu .dropdown-item:hover,
+.account-menu .dropdown-item:focus {
+  background: var(--mustard-light);
+}
+
+.account-menu .dropdown-item:active {
+  color: var(--ink);
+  background: var(--mustard);
+}
+
+.account-menu__email {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Log in / create account */
+.auth-card {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin-bottom: 28px;
+  padding: 4px;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+}
+
+.auth-tab {
+  padding: 10px 12px;
+  font-weight: 700;
+  color: var(--muted);
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 999px;
+}
+
+@media (max-width: 575.98px) {
+  .auth-card {
+    padding: 24px 20px;
+  }
+
+  .auth-tab {
+    padding: 8px 6px;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+}
+
+.auth-tab.active {
+  color: var(--ink);
+  background: var(--mustard);
+  border-color: var(--ink);
+}
+
+.auth-notice,
+.auth-error {
+  margin-bottom: 20px;
+  padding: 10px 14px;
+  font-weight: 500;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-sm);
+}
+
+.auth-notice {
+  background: var(--mustard-light);
+}
+
+.auth-error {
+  color: #8C2416;
+  background: #FBE0DB;
+}
+
+.auth-footnote {
+  margin: 24px 0 0;
+  font-size: 13px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* My account */
+.profile-card {
+  padding: 32px 28px;
+  text-align: center;
+}
+
+.profile-card__avatar {
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  margin: 0 auto;
+  font-size: 38px;
+  color: var(--ink);
+  background: var(--mustard);
+  border: var(--outline);
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+}
+
+.profile-card h2 {
+  margin: 18px 0 4px;
+  font-size: 26px;
+}
+
+.profile-card__email {
+  margin-bottom: 12px;
+  color: var(--muted);
+  word-break: break-word;
+}
+
+.profile-card__role {
+  display: inline-block;
+  padding: 2px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+}
+
+.profile-card__actions {
+  display: grid;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.order-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.order {
+  padding: 20px 24px;
+}
+
+.order + .order {
+  border-top: 2px dashed rgba(35, 31, 32, 0.3);
+}
+
+.order__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.order__id {
+  margin: 0;
+  font-weight: 700;
+}
+
+.order__date {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.order__total {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 20px;
+}
+
+.order__items {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.order__items li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+}
+
+.order__items img {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+}
+
+.order__qty {
+  margin-left: auto;
+  color: var(--muted);
+  white-space: nowrap;
 }
 
 /*---------------------------------------
